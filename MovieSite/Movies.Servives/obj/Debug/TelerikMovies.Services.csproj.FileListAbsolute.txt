@@ -1,0 +1,5 @@
+C:\Users\Vasil\Desktop\moviesMVC\MovieSite\Movies.Servives\bin\Debug\TelerikMovies.Services.dll
+C:\Users\Vasil\Desktop\moviesMVC\MovieSite\Movies.Servives\bin\Debug\TelerikMovies.Services.pdb
+C:\Users\Vasil\Desktop\moviesMVC\MovieSite\Movies.Servives\obj\Debug\TelerikMovies.Services.csprojResolveAssemblyReference.cache
+C:\Users\Vasil\Desktop\moviesMVC\MovieSite\Movies.Servives\obj\Debug\TelerikMovies.Services.dll
+C:\Users\Vasil\Desktop\moviesMVC\MovieSite\Movies.Servives\obj\Debug\TelerikMovies.Services.pdb
