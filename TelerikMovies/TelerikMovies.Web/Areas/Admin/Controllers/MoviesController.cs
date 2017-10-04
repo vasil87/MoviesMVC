@@ -34,7 +34,9 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(MovieCreateViewModel model)
         {
-            return null;
+            if (this.ModelState.IsValid) {
+            }
+            return View(model);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using AutoMapper;
 using TelerikMovies.Models;
 using TelerikMovies.Web.Infrastructure;
 
@@ -8,6 +9,11 @@ namespace TelerikMovies.Web.Areas.Admin.Models
 {
     public class MovieCreateViewModel:IMapFrom<Movies>
     {
+        public MovieCreateViewModel()
+        {
+            this.Genres = new List<GenresViewModel>();
+        }
+
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }
@@ -28,7 +34,7 @@ namespace TelerikMovies.Web.Areas.Admin.Models
         public DateTime ReleaseDate { get; set; }
 
         [Required]
-        public ICollection<Genres> Genres { get; set; }
+        public IList<GenresViewModel> Genres { get; set; }
 
     }
 }
