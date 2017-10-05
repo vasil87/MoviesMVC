@@ -1,0 +1,30 @@
+﻿@using Common.Contracts
+@using Common.Enums
+@model IResult
+@{
+    string success = String.Empty;
+    string error = String.Empty;
+
+    if (Model.ResulType == ResultType.Success)
+    {
+        success = Model.ErrorMsg;
+    }
+    else
+    {
+        error = Model.ErrorMsg;
+    }
+}
+@if (!String.IsNullOrWhiteSpace(error))
+{
+    <div class="row">
+        <div class="col s12 border-red"><h4 class="red-text text-darken-4"><i class="material-icons medium left">error</i>@(error)</h4></div>
+    </div>
+}
+else if (!String.IsNullOrWhiteSpace(success))
+{
+    <div class="row">
+        <div class="col s12 border-green">
+            <h4 class="green-text text-darken-1"><i class="material-icons medium left">check</i>@(success)</h4>
+        </div>
+    </div>
+}

@@ -39,6 +39,16 @@
     z-index : 101;
 }
 
+.border-red {
+    border:2px solid red !important;
+    border-radius:10px;
+}
+
+.border-green {
+    border:2px solid green !important;
+    border-radius:10px;
+}
+
 @media screen and (max-width: 1000px) {
     .logo {
         width: 30%;

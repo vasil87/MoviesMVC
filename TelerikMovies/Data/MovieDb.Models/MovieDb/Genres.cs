@@ -21,5 +21,10 @@ namespace TelerikMovies.Models
             get { return this.movies; }
             set { this.movies = value; }
         }
+
+        public override int GetHashCode()
+        {
+            return this.Name.GetHashCode();
+        }
     }
 }

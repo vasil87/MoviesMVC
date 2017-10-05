@@ -1,8 +1,5 @@
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Debug\TelerikMovies.Services.dll
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Debug\TelerikMovies.Services.pdb
-C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\obj\Debug\TelerikMovies.Services.csprojResolveAssemblyReference.cache
-C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\obj\Debug\TelerikMovies.Services.dll
-C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\obj\Debug\TelerikMovies.Services.pdb
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Debug\Common.dll
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Debug\TelerikMovies.Data.dll
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Debug\TelerikMovies.Models.dll
@@ -15,3 +12,6 @@ C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Debug\EntityFramework.xml
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\obj\Debug\TelerikMovies.Services.csprojResolveAssemblyReference.cache
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\obj\Debug\TelerikMovies.Services.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\obj\Debug\TelerikMovies.Services.pdb

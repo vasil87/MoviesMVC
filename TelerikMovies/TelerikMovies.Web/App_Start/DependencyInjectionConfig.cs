@@ -17,7 +17,8 @@ namespace TelerikMovies.Web
     using Data.Repositories;
     using Data.UoW;
     using Common;
-
+    using System.Collections.Generic;
+    using TelerikMovies.Models;
     public static class DependencyInjectionConfig
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -82,6 +83,7 @@ namespace TelerikMovies.Web
                  .BindDefaultInterface();
             });
 
+            kernel.Bind<IEqualityComparer<Genres>>().To<GenreComparer>();
             kernel.Bind<IMoviesContext>().To<MoviesContext>().InRequestScope();
             kernel.Bind(typeof(IEfGenericRepository<>)).To(typeof(EfGenericRepository<>));
             kernel.Bind<IUoW>().To<UoW>();

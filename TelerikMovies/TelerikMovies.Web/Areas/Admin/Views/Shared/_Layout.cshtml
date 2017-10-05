@@ -1,5 +1,9 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@{ 
+    Object messages = ViewBag.Result;
+}
+
+<!DOCTYPE html>
+<html id="master">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,9 +23,9 @@
                 </a>
                 <a href="#" data-activates="mobile-menu" class="button-collapse right"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="hide-on-med-and-down right">
-                    <li>@Html.ActionLink("Create", "Create")</li>
-                    <li>@Html.ActionLink("Edit", "Edit")</li>
-                    <li>@Html.ActionLink("All", "GetAll")</li>
+                    <li>@Html.ActionLink("Add Movie", "Create","Movies")</li>
+                    <li>@Html.ActionLink("Add Genre", "Create","Genres")</li>
+                    <li>@Html.ActionLink("All Movies", "All", "Movies"))</li>
                 </ul>
             </div>
         </nav>
@@ -38,12 +42,17 @@
         <li>@Html.ActionLink("Edit", "Edit", null, new { @class = "white-text" })</li>
         <li>@Html.ActionLink("All", "GetAll", null, new { @class = "white-text" })</li>
     </ul>
-    <div class="container">
-        @Html.Partial("_Loader")
-        <div id="main-content">
+    <div class="row">
+        <div class="offset-s2 col s8">
+            <br/>
+            @if (messages != null)
+            {
+                Html.RenderPartial("_Messages", messages);
+            }
+            @Html.Partial("_Loader")
             @RenderBody()
         </div>
-    </div>
+    </div> 
     <footer>
         <hr />  
         <p class="center-align">&copy; @DateTime.Now.Year - MovieHub All RIGHTS RESERVED</p>

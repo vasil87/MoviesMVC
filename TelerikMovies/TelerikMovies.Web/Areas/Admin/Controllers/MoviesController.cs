@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Common;
 using Common.Enums;
 using System;
 using System.Linq;
+using System.Threading;
 using System.Web.Mvc;
 using TelerikMovies.Data.Contracts;
 using TelerikMovies.Models;
@@ -38,30 +41,37 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(MovieCreateViewModel model)
         {
-            this.ModelState.AddModelError("hello", "EXCEPTION");
-            this.ModelState.AddModelError("hello", "EXCEPTION2");
-            this.ModelState.AddModelError("hello", "EXCEPTION3");
             if (this.ModelState.IsValid)
             {
-
                 var result = this.moviesSV.AddMovie(Mapper.Map<Movies>(model));
-
-                if (result.ResulType != ResultType.Success)
+                if (result.ResulType == ResultType.Success)
                 {
-                    return PartialView("_Errors", result.ErrorMsg);
+                    model = new MovieCreateViewModel();
+                    this.ModelState.Clear();
                 }
-                else
-                {
-                    var newModel = new MovieCreateViewModel();
-                    return PartialView("_Errors", result.ResulType.ToString());
-                }
+                model.Result = result;
             }
-            else
-            {
-                var errors = this.ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage);
-                return PartialView("_Errors", string.Join("\r\n", errors));
+            else {
+                var allErrorsAsString = this.ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage);
+                var errorResult = new Result(string.Join(Environment.NewLine, allErrorsAsString), ResultType.Error);
+                model.Result = errorResult;
             }
 
+            return View(model);
+        }
+
+        public ActionResult All(int pagesize=20,int pageNumber=1)
+        {
+            var howManyToSkip = (pageNumber - 1)*pagesize;
+            var allMovies = this.moviesSV.GetAllAndDeleted().Select(x => Mapper.Map<GridMovieViewModel>(x));
+            var elementsCount = allMovies.Count();
+            var moviesToRender= allMovies.Skip(howManyToSkip)
+                                          .Take(pagesize)
+                                          .ToList();
+            var model = new TableMoviesViewModel(moviesToRender);
+            model.elementsNumber = elementsCount;
+
+            return View(model);
         }
     }
 }

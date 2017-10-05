@@ -1,5 +1,0 @@
-C:\Users\Vasil\Desktop\moviesMVC\MovieSite\Common\bin\Debug\Common.dll
-C:\Users\Vasil\Desktop\moviesMVC\MovieSite\Common\bin\Debug\Common.pdb
-C:\Users\Vasil\Desktop\moviesMVC\MovieSite\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
-C:\Users\Vasil\Desktop\moviesMVC\MovieSite\Common\obj\Debug\Common.dll
-C:\Users\Vasil\Desktop\moviesMVC\MovieSite\Common\obj\Debug\Common.pdb

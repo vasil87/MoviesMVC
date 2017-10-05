@@ -194,8 +194,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\GenresController.cs" />
     <Compile Include="Areas\Admin\Controllers\MoviesController.cs" />
+    <Compile Include="Areas\Admin\Models\Abstracts\PageableModel.cs" />
+    <Compile Include="Areas\Admin\Models\Abstracts\CreateResultModel.cs" />
     <Compile Include="Areas\Admin\Models\GenresViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\GridMovieViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\TableMoviesViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -207,6 +212,7 @@
     <Compile Include="Infrastructure\IMapFrom.cs" />
     <Compile Include="Infrastructure\QueryableExtensions.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Areas\Admin\Models\GenreCreateViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Areas\Admin\Models\MovieCreateViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -238,7 +244,9 @@
     <Content Include="fonts\Roboto-Thin.woff" />
     <Content Include="fonts\Roboto-Thin.woff2" />
     <Content Include="Areas\Admin\Views\Shared\_Loader.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Errors.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Messages.cshtml" />
+    <Content Include="Areas\Admin\Views\Genres\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Movies\All.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -252,6 +260,7 @@
     <Content Include="Scripts\materialize.js" />
     <Content Include="Scripts\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\PageScripts\create-genre.js" />
     <Content Include="Scripts\PageScripts\create-movie.js" />
     <Content Include="Scripts\PageScripts\main-admin.js" />
     <Content Include="Scripts\respond.js" />

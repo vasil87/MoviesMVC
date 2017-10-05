@@ -41,12 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenreComparer.cs" />
     <Compile Include="Contracts\ISettingsManager.cs" />
     <Compile Include="Enums\ResultType.cs" />
     <Compile Include="Contracts\IResult.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="SettingsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\MovieDb.Models\TelerikMovies.Models.csproj">
+      <Project>{451b5106-3666-40bd-b41f-a130d377e283}</Project>
+      <Name>TelerikMovies.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,16 +1,11 @@
-﻿@model TelerikMovies.Web.Areas.Admin.Models.MovieCreateViewModel
-
+﻿@using Common.Contracts;
+@model TelerikMovies.Web.Areas.Admin.Models.MovieCreateViewModel
 @{
     string errors = string.Empty;
     ViewBag.Title = "Create Movie";
-    //foreach (ModelState modelState in ViewData.ModelState.Values)
-    //{
-    //    foreach (ModelError error in modelState.Errors)
-    //    {
-    //        errors = errors + error.ErrorMessage;
-    //    }
-    //}
+    ViewBag.Result = Model.Result;
 }
+
 
 @section css {
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -18,49 +13,33 @@
 }
 
 <div class="row">
-    <div class="offset-s1 col s10">
+    <div class="col s12">
         <h2>Create Movie</h2>
         <hr />
         <br />
-        <div id="form-wrapper">
-            @*@using (Html.BeginForm("Create", "Movies", FormMethod.Post, new { @class = "create-movie-form" }))*@
-            @using (Ajax.BeginForm("Create", null,
-            new AjaxOptions
+        @using (Html.BeginForm("Create", "Movies", FormMethod.Post, new { @class = "create-movie-form" }))
             {
-                HttpMethod = "POST",
-                InsertionMode = InsertionMode.Replace,
-                UpdateTargetId = "errors",
-                LoadingElementId = "loader"
-            }, new { @class = "create-movie-form" }))
-            {
-                @Html.AntiForgeryToken()
-                 <div class="row" id="errors">
+
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="input-field col s6 name-container">
+                    @Html.LabelFor(model => model.Name)
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "red-text text-darken-4" })
                 </div>
-                @*if (!String.IsNullOrWhiteSpace(errors))
-                {
-                    <div class="row" id="errors">
-                        <blockquote class="col s12"><h4 class="red-text text-darken-4">@(errors)</h4></blockquote>
-                    </div>
-                }*@
-                <div class="row">
-                    <div class="input-field col s6 name-container">
-                        @Html.LabelFor(model => model.Name)
-                        @Html.EditorFor(model => model.Name)
-                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "red-text text-darken-4" })
-                    </div>
-                    <div class="col s6">
-                        @Html.LabelFor(model => model.ReleaseDate)
-                        @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "datepicker" } })
-                        @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "red-text text-darken-4" })
-                    </div>
+                <div class="col s6">
+                    @Html.LabelFor(model => model.ReleaseDate)
+                    @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "datepicker" } })
+                    @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "red-text text-darken-4" })
                 </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        @Html.TextAreaFor(model => model.Description, new { @class = "materialize-textarea" })
-                        @Html.LabelFor(model => model.Description)
-                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "red-text text-darken-4" })
-                    </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    @Html.TextAreaFor(model => model.Description, new { @class = "materialize-textarea" })
+                    @Html.LabelFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "red-text text-darken-4" })
                 </div>
+            </div>
                 <div class="row">
                     <div class="input-field col s12">
                         @Html.LabelFor(model => model.ImgUrl)
@@ -68,20 +47,20 @@
                         @Html.ValidationMessageFor(model => model.ImgUrl, "", new { @class = "red-text text-darken-4" })
                     </div>
                 </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            @Html.LabelFor(model => model.TrailerUrl)
-                            @Html.EditorFor(model => model.TrailerUrl)
-                            @Html.ValidationMessageFor(model => model.TrailerUrl, "", new { @class = "red-text text-darken-4" })
+                <div class="row">
+                    <div class="input-field col s12">
+                        @Html.LabelFor(model => model.TrailerUrl)
+                        @Html.EditorFor(model => model.TrailerUrl)
+                        @Html.ValidationMessageFor(model => model.TrailerUrl, "", new { @class = "red-text text-darken-4" })
 
-                        </div>
                     </div>
+                </div>
                     <div class="row">
                         @if (Model.Genres.Count() == 0)
                         {
                             <div class="input-field col s4 genre">
                                 <label for="Genre1">Genre</label>
-                                <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field Genre must be a string." data-val-maxlength-max="500" data-val-required="The Genre field is required." id="Genre1" name="Genres[0].Name" type="text" value="">
+                                <input class="text-box single-line autocomplete" autocomplete="off" data-val="true" data-val-maxlength="The field Genre must be a string." data-val-maxlength-max="500" data-val-required="The Genre field is required." id="Genre1" name="Genres[0].Name" type="text" value="">
                                 <span class="field-validation-valid red-text text-darken-4" data-valmsg-for="Genres[0].Name" data-valmsg-replace="true"></span>
                             </div>
                         }
@@ -93,11 +72,11 @@
                                     @Html.LabelFor(x => Model.Genres[i].Name)
                                     @if (Model.Genres[i].Name == null)
                                     {
-                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field Genre must be a string." data-val-maxlength-max="500" data-val-required="The Genre field is required." id="Genre@(i+1)" name="Genres[@(i)].Name" type="text" value="">
+                                        <input class="text-box single-line autocomplete" autocomplete="off" data-val="true" data-val-maxlength="The field Genre must be a string." data-val-maxlength-max="500" data-val-required="The Genre field is required." id="Genre@(i+1)" name="Genres[@(i)].Name" type="text" value="">
                                         <span class="field-validation-valid red-text text-darken-4" data-valmsg-for="Genres[@(i)].Name" data-valmsg-replace="true"></span>
                                     }
                                     else {
-                                        @Html.EditorFor(x => Model.Genres[i].Name)
+                                        @Html.EditorFor(x => Model.Genres[i].Name, new { htmlAttributes =new { @class = "autocomplete", autocomplete = "off" } })
                                         @Html.ValidationMessageFor(x => x.Genres[i].Name, "", new { @class = "red-text text-darken-4" })
                                     }
                                 </div>
@@ -105,11 +84,11 @@
                         }
                         <a class="btn-floating btn-large waves-effect waves-light  yellow accent-4" id="AddGenre"><i class="material-icons">add</i></a>
                     </div>
-                    <input class="btn waves-effect waves-light  yellow accent-4" type="submit" value="Create"/>
-                       
-                   
-            }
-        </div>
+                    <button class="btn waves-effect waves-light  yellow accent-4" type="submit" name="action">
+                        Create
+                        <i class="material-icons right">send</i>
+                    </button>
+        }
     </div>
 </div>
 

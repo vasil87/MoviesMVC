@@ -7,11 +7,12 @@ using TelerikMovies.Web.Infrastructure;
 
 namespace TelerikMovies.Web.Areas.Admin.Models
 {
-    public class MovieCreateViewModel:IMapFrom<Movies>
+    public class MovieCreateViewModel:CreateResultModel,IMapFrom<Movies>
     {
         public MovieCreateViewModel()
         {
             this.Genres = new List<GenresViewModel>();
+            this.Result = null;
         }
 
         [Required]
