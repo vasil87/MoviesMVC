@@ -1,108 +1,119 @@
 ﻿@model TelerikMovies.Web.Areas.Admin.Models.MovieCreateViewModel
 
 @{
+    string errors = string.Empty;
     ViewBag.Title = "Create Movie";
+    //foreach (ModelState modelState in ViewData.ModelState.Values)
+    //{
+    //    foreach (ModelError error in modelState.Errors)
+    //    {
+    //        errors = errors + error.ErrorMessage;
+    //    }
+    //}
 }
 
-<h2>Create</h2>
+@section css {
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/Content/PageCss/Create.css" rel="stylesheet" />
+}
 
-
-@using (Html.BeginForm("Create", "Movies"))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Movie</h4>
+<div class="row">
+    <div class="offset-s1 col s10">
+        <h2>Create Movie</h2>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.ReleaseDate, htmlAttributes: new { @class = "control-label col-md-2 " })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
-                @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ImgUrl, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ImgUrl, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ImgUrl, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TrailerUrl, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TrailerUrl, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TrailerUrl, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        @if (Model.Genres.Count() == 0)
-        {
-            <div class="form-group genre">
-                <label class="control-label col-md-2" for="Genre1">Genre</label>
-                <div class="col-md-10">
-                    <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field Genre must be a string." data-val-maxlength-max="500" data-val-required="The Genre field is required." id="Genre1" name="Genres[0].Name" type="text" value="">
-                    <span class="field-validation-valid text-danger" data-valmsg-for="Genres[0].Name" data-valmsg-replace="true"></span>
-                </div>
-            </div>
-        }
-        else {
-
-            for (int i = 0; i < Model.Genres.Count(); i++)
+        <br />
+        <div id="form-wrapper">
+            @*@using (Html.BeginForm("Create", "Movies", FormMethod.Post, new { @class = "create-movie-form" }))*@
+            @using (Ajax.BeginForm("Create", null,
+            new AjaxOptions
             {
-                <div class="form-group genre">
-                    @Html.LabelFor(x => Model.Genres[i].Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @if (Model.Genres[i].Name == null)
-                        {
-                            <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field Genre must be a string." data-val-maxlength-max="500" data-val-required="The Genre field is required." id="Genre@(i+1)" name="Genres[@(i)].Name" type="text" value="">
-                            <span class="field-validation-valid text-danger" data-valmsg-for="Genres[@(i)].Name" data-valmsg-replace="true"></span>
-                        }
-                        else {
-                            @Html.EditorFor(x => Model.Genres[i].Name, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(x => x.Genres[i].Name, "", new { @class = "text-danger" })
-                        }
-
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "errors",
+                LoadingElementId = "loader"
+            }, new { @class = "create-movie-form" }))
+            {
+                @Html.AntiForgeryToken()
+                 <div class="row" id="errors">
+                </div>
+                @*if (!String.IsNullOrWhiteSpace(errors))
+                {
+                    <div class="row" id="errors">
+                        <blockquote class="col s12"><h4 class="red-text text-darken-4">@(errors)</h4></blockquote>
+                    </div>
+                }*@
+                <div class="row">
+                    <div class="input-field col s6 name-container">
+                        @Html.LabelFor(model => model.Name)
+                        @Html.EditorFor(model => model.Name)
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "red-text text-darken-4" })
+                    </div>
+                    <div class="col s6">
+                        @Html.LabelFor(model => model.ReleaseDate)
+                        @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "datepicker" } })
+                        @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "red-text text-darken-4" })
                     </div>
                 </div>
-            }
-        }
+                <div class="row">
+                    <div class="input-field col s12">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "materialize-textarea" })
+                        @Html.LabelFor(model => model.Description)
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "red-text text-darken-4" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        @Html.LabelFor(model => model.ImgUrl)
+                        @Html.EditorFor(model => model.ImgUrl)
+                        @Html.ValidationMessageFor(model => model.ImgUrl, "", new { @class = "red-text text-darken-4" })
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            @Html.LabelFor(model => model.TrailerUrl)
+                            @Html.EditorFor(model => model.TrailerUrl)
+                            @Html.ValidationMessageFor(model => model.TrailerUrl, "", new { @class = "red-text text-darken-4" })
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="button" class="btn btn-primary" id="AddGenre">Add</button>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @if (Model.Genres.Count() == 0)
+                        {
+                            <div class="input-field col s4 genre">
+                                <label for="Genre1">Genre</label>
+                                <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field Genre must be a string." data-val-maxlength-max="500" data-val-required="The Genre field is required." id="Genre1" name="Genres[0].Name" type="text" value="">
+                                <span class="field-validation-valid red-text text-darken-4" data-valmsg-for="Genres[0].Name" data-valmsg-replace="true"></span>
+                            </div>
+                        }
+                        else {
+
+                            for (int i = 0; i < Model.Genres.Count(); i++)
+                            {
+                                <div class="input-field col s4  genre">
+                                    @Html.LabelFor(x => Model.Genres[i].Name)
+                                    @if (Model.Genres[i].Name == null)
+                                    {
+                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field Genre must be a string." data-val-maxlength-max="500" data-val-required="The Genre field is required." id="Genre@(i+1)" name="Genres[@(i)].Name" type="text" value="">
+                                        <span class="field-validation-valid red-text text-darken-4" data-valmsg-for="Genres[@(i)].Name" data-valmsg-replace="true"></span>
+                                    }
+                                    else {
+                                        @Html.EditorFor(x => Model.Genres[i].Name)
+                                        @Html.ValidationMessageFor(x => x.Genres[i].Name, "", new { @class = "red-text text-darken-4" })
+                                    }
+                                </div>
+                            }
+                        }
+                        <a class="btn-floating btn-large waves-effect waves-light  yellow accent-4" id="AddGenre"><i class="material-icons">add</i></a>
+                    </div>
+                    <input class="btn waves-effect waves-light  yellow accent-4" type="submit" value="Create"/>
+                       
+                   
+            }
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/PageScripts/CreateMovie.js"></script>
+    <script src="~/Scripts/PageScripts/create-movie.js"></script>
 }

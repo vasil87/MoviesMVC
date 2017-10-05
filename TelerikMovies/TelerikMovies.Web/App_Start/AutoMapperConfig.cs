@@ -17,9 +17,9 @@ namespace TelerikMovies.Web.ForumSystem.Web.App_Start
                 cfg =>
                 {
                     var types = assembly.GetExportedTypes();
-                    LoadStandardMappings(types, cfg);
-                    LoadCustomMappings(types, cfg);
                     Configuration = cfg;
+                    LoadStandardMappings(types, cfg);
+                    LoadCustomMappings(types, cfg);                  
                 });
         }
 

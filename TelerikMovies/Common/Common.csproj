@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\ISettingsManager.cs" />
+    <Compile Include="Enums\ResultType.cs" />
+    <Compile Include="Contracts\IResult.cs" />
+    <Compile Include="Result.cs" />
     <Compile Include="SettingsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

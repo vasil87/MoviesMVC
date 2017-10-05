@@ -1,0 +1,17 @@
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Release\TelerikMovies.Services.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Release\TelerikMovies.Services.pdb
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Release\Common.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Release\TelerikMovies.Data.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Release\TelerikMovies.Models.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Release\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Release\EntityFramework.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Release\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Release\Common.pdb
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Release\TelerikMovies.Data.pdb
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Release\TelerikMovies.Models.pdb
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Release\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Release\EntityFramework.xml
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\bin\Release\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\obj\Release\TelerikMovies.Services.csprojResolveAssemblyReference.cache
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\obj\Release\TelerikMovies.Services.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Services\obj\Release\TelerikMovies.Services.pdb

@@ -1,0 +1,12 @@
+﻿.picker__date-display {
+  background-color:#ab47bc;
+}
+.picker__weekday-display {
+  background-color:#ab47bc;
+}
+.picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
+  background-color:#ab47bc;
+}
+.name-container {
+    margin-top:22px;
+}

@@ -17,20 +17,21 @@ namespace TelerikMovies.Web
     using Data.Repositories;
     using Data.UoW;
     using Common;
-    public static class DependencyInjectionConfig 
+
+    public static class DependencyInjectionConfig
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -38,7 +39,7 @@ namespace TelerikMovies.Web
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
@@ -84,8 +85,7 @@ namespace TelerikMovies.Web
             kernel.Bind<IMoviesContext>().To<MoviesContext>().InRequestScope();
             kernel.Bind(typeof(IEfGenericRepository<>)).To(typeof(EfGenericRepository<>));
             kernel.Bind<IUoW>().To<UoW>();
-            kernel.Bind<IMapper>().To<Mapper>();
             kernel.Bind<ISettingsManager>().To<SettingsManager>();
-        }        
+        }
     }
 }
