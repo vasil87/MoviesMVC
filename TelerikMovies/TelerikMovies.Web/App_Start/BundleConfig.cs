@@ -8,6 +8,12 @@ namespace TelerikMovies.Web
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new ScriptBundle("~/bundles/data-tables").Include(
+                    "~/Scripts/DataTables/jquery.dataTables.min.js",
+                     "~/Scripts/DataTables/dataTables.buttons.min.js",
+                    "~/Scripts/DataTables/dataTables.responsive.min.js",
+                    "~/Scripts/DataTables/dataTables.select.min.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/materialize").Include(
                        "~/Scripts/materialize.js"));
 
@@ -30,6 +36,12 @@ namespace TelerikMovies.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/materialize.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/data-tables-css").Include(
+                    "~/Content/DataTables/css/jquery.dataTables.min.css",
+                     "~/Content/DataTables/css/responsive.dataTables.min.css",
+                      "~/Content/DataTables/css/select.dataTables.min.css",
+                     "~/Content/DataTables/css/buttons.dataTables.min.css"));
         }
     }
 }

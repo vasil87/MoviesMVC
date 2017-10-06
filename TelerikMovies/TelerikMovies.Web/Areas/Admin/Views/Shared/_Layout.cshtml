@@ -10,6 +10,7 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     @RenderSection("css", required: false)
 </head>
 <body>
@@ -50,7 +51,9 @@
                 Html.RenderPartial("_Messages", messages);
             }
             @Html.Partial("_Loader")
-            @RenderBody()
+            <div class="main-content">
+                @RenderBody()
+            </div>
         </div>
     </div> 
     <footer>

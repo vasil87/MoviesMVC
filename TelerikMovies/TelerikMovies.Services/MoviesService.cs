@@ -77,5 +77,76 @@ namespace TelerikMovies.Services
         {
             return this.moviesRepo.All().ToList();
         }
+
+        public IResult DeleteByid(Guid id)
+        {
+            var result = new Result( ResultType.Success);
+
+            var curentMovie =this.moviesRepo.GetById(id);
+            var isDeleted = curentMovie.IsDeleted;
+
+            if (isDeleted)
+            {
+                result = new Result(ResultType.AlreadyDeleted);
+                return result;
+            }
+
+            if (curentMovie != null )
+            {
+                
+                try
+                {
+                    this.moviesRepo.Delete(curentMovie);
+                    this.saver.Save();
+                }
+                catch (Exception ex)
+                {
+                    result.ResulType = ResultType.Error;
+                    result.ErrorMsg = ex.Message;
+                }
+            }
+            else
+            {
+                result.ResulType = ResultType.DoesntExists;
+            }
+
+            return result;
+        }
+
+        public IResult UndoDeleteById(Guid id)
+        {
+            var result = new Result(ResultType.Success);
+
+            var curentMovie = this.moviesRepo.GetById(id);
+            var isDeleted = curentMovie.IsDeleted;
+
+            if (!isDeleted)
+            {
+                result = new Result(ResultType.AlreadyExists);
+                return result;
+            }
+
+            if (curentMovie != null)
+            {
+
+                try
+                {
+                    curentMovie.IsDeleted = false;
+                    this.moviesRepo.Update(curentMovie);
+                    this.saver.Save();
+                }
+                catch (Exception ex)
+                {
+                    result.ResulType = ResultType.Error;
+                    result.ErrorMsg = ex.Message;
+                }
+            }
+            else
+            {
+                result.ResulType = ResultType.DoesntExists;
+            }
+
+            return result;
+        }
     }
 }

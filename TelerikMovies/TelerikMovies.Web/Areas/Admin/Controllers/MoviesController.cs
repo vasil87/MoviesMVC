@@ -4,17 +4,19 @@ using Common;
 using Common.Enums;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Web.Mvc;
 using TelerikMovies.Data.Contracts;
 using TelerikMovies.Models;
 using TelerikMovies.Services.Contracts;
 using TelerikMovies.Web.Areas.Admin.Models;
+using TelerikMovies.Web.Areas.Admin.Models.Contracts;
 
 namespace TelerikMovies.Web.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class MoviesController : Controller
+    public class MoviesController : DataTableController
     {
         private IMoviesService moviesSV;
         private IUoW save;
@@ -26,7 +28,7 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
         }
         public ActionResult Index()
         {
-            //var movies = this.movies.All().ToList();
+
             return View();
         }
 
@@ -60,18 +62,92 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        public ActionResult All(int pagesize=20,int pageNumber=1)
+        [HttpGet]
+        public ActionResult Edit(Guid id)
         {
-            var howManyToSkip = (pageNumber - 1)*pagesize;
-            var allMovies = this.moviesSV.GetAllAndDeleted().Select(x => Mapper.Map<GridMovieViewModel>(x));
-            var elementsCount = allMovies.Count();
-            var moviesToRender= allMovies.Skip(howManyToSkip)
-                                          .Take(pagesize)
-                                          .ToList();
-            var model = new TableMoviesViewModel(moviesToRender);
-            model.elementsNumber = elementsCount;
+            var model = new MovieCreateViewModel();
 
             return View(model);
         }
+
+        [HttpPost]
+        public ActionResult Edit(MovieCreateViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var result = this.moviesSV.AddMovie(Mapper.Map<Movies>(model));
+                if (result.ResulType == ResultType.Success)
+                {
+                    model = new MovieCreateViewModel();
+                    this.ModelState.Clear();
+                }
+                model.Result = result;
+            }
+            else {
+                var allErrorsAsString = this.ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage);
+                var errorResult = new Result(string.Join(Environment.NewLine, allErrorsAsString), ResultType.Error);
+                model.Result = errorResult;
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AllMoviesJson(int draw, int start, int length)
+        {
+            var allMovies = this.moviesSV.GetAllAndDeleted().Select(x => Mapper.Map<GridMovieViewModel>(x)).ToList();
+            var totalMoviesCount = allMovies.Count();
+
+            IDataTableViewModel<GridMovieViewModel> dataTableData = new DataTableViewModel<GridMovieViewModel>();
+
+            this.FillDataTable(dataTableData, allMovies, draw, totalMoviesCount, start, length);
+
+            return Json(dataTableData);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Guid[] ids)
+        {
+            if (ids != null)
+            {
+                foreach (var id in ids)
+                {
+                   var result= this.moviesSV.DeleteByid(id);
+                    if (result.ResulType != ResultType.Success)
+                    {
+                          return new HttpStatusCodeResult(HttpStatusCode.BadRequest, result.ErrorMsg);
+                    }
+                }
+            }
+            else {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "No ids selected");
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK,"Successfully removed");
+        }
+
+        [HttpPost]
+        public ActionResult UndoDelete(Guid[] ids)
+        {
+            if (ids != null)
+            {
+                foreach (var id in ids)
+                {
+                    var result = this.moviesSV.UndoDeleteById(id);
+                    if (result.ResulType != ResultType.Success)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest, result.ErrorMsg);
+                    }
+                }
+            }
+            else {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "No ids selected");
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK, "Successfully removed");
+        }
+
+
+
     }
 }

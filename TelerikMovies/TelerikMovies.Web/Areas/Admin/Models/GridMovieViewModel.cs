@@ -13,7 +13,6 @@ namespace TelerikMovies.Web.Areas.Admin.Models
         {
             this.Result = null;
         }
-
         public string Name { get; set; }
 
         public DateTime ReleaseDate { get; set; }
@@ -29,7 +28,7 @@ namespace TelerikMovies.Web.Areas.Admin.Models
         public int Likes { get; set; }
 
         public int Dislikes { get; set; }
-
+        public Guid Id { get; set; }
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<Movies, GridMovieViewModel>()

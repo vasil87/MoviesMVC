@@ -5,10 +5,17 @@ namespace Common
 {
     public class Result : IResult
     {
+        private string errorMsg;
         public Result()
         {
             this.ErrorMsg = string.Empty;
             this.ResulType = ResultType.Success;
+        }
+
+        public Result(ResultType type)
+        {
+            this.ErrorMsg = string.Empty; 
+            this.ResulType = type;
         }
         public Result(string errorMsg, ResultType type)
         {
@@ -16,7 +23,23 @@ namespace Common
             this.ResulType = type;
         }
 
-        public string ErrorMsg { get; set; }
+        public string ErrorMsg
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(errorMsg))
+                {
+                    return ErrorMessages.ErorsDict[this.ResulType];
+                }
+                return this.errorMsg;
+            }
+
+            set
+            {
+                this.errorMsg = value;
+
+            }
+        }
         public ResultType ResulType { get; set; }
     }
 }

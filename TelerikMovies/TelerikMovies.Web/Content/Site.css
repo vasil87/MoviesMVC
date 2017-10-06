@@ -17,6 +17,13 @@
     background-color:#ffd600;
 }
 
+.movie-id {
+    display:none!important;
+}
+
+.main-content {
+    min-height:700px;
+}
 #cover
 {   
     position : fixed;

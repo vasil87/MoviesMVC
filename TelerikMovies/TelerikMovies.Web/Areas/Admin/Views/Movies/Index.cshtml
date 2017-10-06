@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "All Movies";
+    var url = @String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~")) + "Admin/Movies/AllMoviesJson";
+    var deleteRowsUrl= @String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~")) + "Admin/Movies/Delete";
+    var undoDelete = @String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~")) + "Admin/Movies/UndoDelete";
+    var editMovie = @String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~")) + "Admin/Movies/Edit/";
+}
+
+<h2>All Movies</h2>
+
+<table id="movies-data-table-admin" cellspacing="0" width="100%" class="hover row-border" data-url="@(url)">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>ReleaseDate</th>
+            <th>CreatedOn</th>
+            <th>ModifiedOn</th>
+            <th>DeletedOn</th>
+            <th>isDeleted</th>
+            <th>Likes</th>
+            <th>Dislikes</th>
+            <th>Id</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large  primary-color" title="Menu">
+        <i class="large material-icons">apps</i>
+    </a>
+    <ul>
+        <li><a title="Delete" id="delete-movie" data-url="@(deleteRowsUrl)" class="btn-floating btn-large waves-effect waves-light red "><i class="material-icons">delete</i></a></a></li>
+        <li><a title="Publish" id="undo-delete-movie" data-url="@(undoDelete)" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">publish</i></a></li>
+        <li><a title="Edit" id="edit-movie" data-url="@(editMovie)" class="btn-floating btn-large waves-effect waves-light yellow darken-1"><i class="material-icons">mode_edit</i></a></li>
+    </ul>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/data-tables")
+    <script src="~/Scripts/PageScripts/all-movies-admin.js"></script>
+}
+
+@section css {
+    @Styles.Render("~/bundles/data-tables-css")
+    <link href="~/Content/PageCss/all-movies-admin.css" rel="stylesheet" />
+}
+
