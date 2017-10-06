@@ -63,9 +63,15 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(Guid id)
+        public ActionResult Edit(String id)
         {
-            var model = new MovieCreateViewModel();
+            Guid Id;
+            var result=Guid.TryParse(id, out Id);
+            if (id == null || Id==null || result==false)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest,"Should Send Id");
+            }
+            var model = Mapper.Map<MovieCreateViewModel>(this.moviesSV.GetMovieById(Id, true));
 
             return View(model);
         }
@@ -73,21 +79,21 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(MovieCreateViewModel model)
         {
-            if (this.ModelState.IsValid)
-            {
-                var result = this.moviesSV.AddMovie(Mapper.Map<Movies>(model));
-                if (result.ResulType == ResultType.Success)
-                {
-                    model = new MovieCreateViewModel();
-                    this.ModelState.Clear();
-                }
-                model.Result = result;
-            }
-            else {
-                var allErrorsAsString = this.ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage);
-                var errorResult = new Result(string.Join(Environment.NewLine, allErrorsAsString), ResultType.Error);
-                model.Result = errorResult;
-            }
+            //if (this.ModelState.IsValid)
+            //{
+            //    var result = this.moviesSV.AddMovie(Mapper.Map<Movies>(model));
+            //    if (result.ResulType == ResultType.Success)
+            //    {
+            //        model = new MovieCreateViewModel();
+            //        this.ModelState.Clear();
+            //    }
+            //    model.Result = result;
+            //}
+            //else {
+            //    var allErrorsAsString = this.ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage);
+            //    var errorResult = new Result(string.Join(Environment.NewLine, allErrorsAsString), ResultType.Error);
+            //    model.Result = errorResult;
+            //}
 
             return View(model);
         }

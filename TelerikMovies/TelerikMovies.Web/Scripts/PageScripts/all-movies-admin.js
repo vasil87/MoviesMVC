@@ -54,6 +54,11 @@
                 'selectNone'
         ],
         select: true,
+        createdRow: function (row, data, index) {
+            if (data.isDeleted==true) {
+                $(row).addClass('deleted-opacity');
+            }
+        }
     });
 
 

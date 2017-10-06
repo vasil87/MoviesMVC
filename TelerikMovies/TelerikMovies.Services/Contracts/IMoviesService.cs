@@ -13,5 +13,7 @@ namespace TelerikMovies.Services.Contracts
         IResult DeleteByid(Guid id);
 
         IResult UndoDeleteById(Guid id);
+
+        Movies GetMovieById(Guid id, bool getDeleted = false);
     }
 }

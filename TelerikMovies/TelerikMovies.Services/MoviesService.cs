@@ -77,6 +77,26 @@ namespace TelerikMovies.Services
         {
             return this.moviesRepo.All().ToList();
         }
+        public Movies GetMovieById(Guid id,bool getDeleted=false)
+        {
+            var curentMovie = this.moviesRepo.GetById(id);
+
+            if (getDeleted)
+            {
+                return curentMovie;
+            }
+            else
+            {
+                if (curentMovie.IsDeleted == true)
+                {
+                    return null;
+                }
+                else
+                {
+                    return curentMovie;
+                }
+            }
+        }
 
         public IResult DeleteByid(Guid id)
         {
@@ -145,6 +165,54 @@ namespace TelerikMovies.Services
             {
                 result.ResulType = ResultType.DoesntExists;
             }
+
+            return result;
+        }
+
+        public IResult EditMovieById(Guid id)
+        {
+            var result = new Result("Success", ResultType.Success);
+
+            //var currentMovie = this.moviesRepo.All().Where(x => x.Name.ToLower() == movie.Name.ToLower()).FirstOrDefault();
+
+            //var existingGenres = new HashSet<Genres>();
+
+            //foreach (var genre in movie.Genres)
+            //{
+            //    var genreToAdd = this.genresSv.GetGenreByName(genre.Name);
+            //    if (genreToAdd != null)
+            //    {
+            //        existingGenres.Add(genreToAdd);
+
+            //    }
+            //    else
+            //    {
+            //        existingGenres.Add(genre);
+            //    }
+            //}
+
+
+            //if (currentMovie == null)
+            //{
+            //    try
+            //    {
+
+            //        movie.Genres = existingGenres;
+            //        this.moviesRepo.Add(movie);
+            //        this.saver.Save();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        result.ErrorMsg = ex.Message;
+            //        result.ResulType = ResultType.Error;
+            //    }
+
+            //}
+            //else
+            //{
+            //    result.ErrorMsg = "Already Exists";
+            //    result.ResulType = ResultType.AlreadyExists;
+            //}
 
             return result;
         }

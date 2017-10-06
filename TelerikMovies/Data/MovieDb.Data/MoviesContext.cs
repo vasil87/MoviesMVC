@@ -41,6 +41,20 @@
                     entity.ModifiedOn = DateTime.Now;
                 }
             }
+
+            foreach (var entry in
+                this.ChangeTracker.Entries()
+                    .Where(
+                        e =>
+                        e.Entity is IDeletable && e.State == EntityState.Modified))
+            {
+                var entity = (IDeletable)entry.Entity;
+
+                if (entity.DeletedOn != null && entity.IsDeleted == false)
+                {
+                    entity.DeletedOn = null;
+                }     
+            }
         }
         public static MoviesContext Create()
         {

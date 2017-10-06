@@ -16,7 +16,9 @@
 .secondary-color {
     background-color:#ffd600;
 }
-
+.deleted-opacity {
+    opacity:0.6;
+}
 .movie-id {
     display:none!important;
 }
