@@ -31,25 +31,24 @@ namespace TelerikMovies.Services
 
             var currentMovie = this.moviesRepo.All().Where(x => x.Name.ToLower() == movie.Name.ToLower()).FirstOrDefault();
 
-            var existingGenres = new HashSet<Genres>();
-
-            foreach (var genre in movie.Genres)
-            {
-                var genreToAdd = this.genresSv.GetGenreByName(genre.Name);
-                if (genreToAdd != null)
-                {
-                    existingGenres.Add(genreToAdd);
-
-                }
-                else
-                {
-                    existingGenres.Add(genre);
-                }
-            }
-
-
             if (currentMovie == null)
             {
+                var existingGenres = new HashSet<Genres>();
+
+                foreach (var genre in movie.Genres)
+                {
+                    var genreToAdd = this.genresSv.GetGenreByName(genre.Name);
+                    if (genreToAdd != null)
+                    {
+                        existingGenres.Add(genreToAdd);
+
+                    }
+                    else
+                    {
+                        existingGenres.Add(genre);
+                    }
+                }
+
                 try
                 {
 
@@ -77,7 +76,7 @@ namespace TelerikMovies.Services
         {
             return this.moviesRepo.All().ToList();
         }
-        public Movies GetMovieById(Guid id,bool getDeleted=false)
+        public Movies GetMovieById(Guid id, bool getDeleted = false)
         {
             var curentMovie = this.moviesRepo.GetById(id);
 
@@ -100,9 +99,9 @@ namespace TelerikMovies.Services
 
         public IResult DeleteByid(Guid id)
         {
-            var result = new Result( ResultType.Success);
+            var result = new Result(ResultType.Success);
 
-            var curentMovie =this.moviesRepo.GetById(id);
+            var curentMovie = this.moviesRepo.GetById(id);
             var isDeleted = curentMovie.IsDeleted;
 
             if (isDeleted)
@@ -111,9 +110,9 @@ namespace TelerikMovies.Services
                 return result;
             }
 
-            if (curentMovie != null )
+            if (curentMovie != null)
             {
-                
+
                 try
                 {
                     this.moviesRepo.Delete(curentMovie);
@@ -213,6 +212,91 @@ namespace TelerikMovies.Services
             //    result.ErrorMsg = "Already Exists";
             //    result.ResulType = ResultType.AlreadyExists;
             //}
+
+            return result;
+        }
+
+        public IResult UpdateMovie(Movies movie)
+        {
+            var result = new Result("Success", ResultType.Success);
+
+            var currentMovie = this.moviesRepo.GetById(movie.Id);
+
+
+            if (currentMovie != null)
+            {
+                var areSame = movie.CompareMoviesWith(currentMovie);
+                if (!areSame)
+                {
+                    var existingGenres = new HashSet<Genres>();
+
+                    foreach (var genre in movie.Genres)
+                    {
+                        var genreToAdd = this.genresSv.GetGenreByName(genre.Name);
+                        if (genreToAdd != null)
+                        {
+                            existingGenres.Add(genreToAdd);
+
+                        }
+                        else
+                        {
+                            existingGenres.Add(genre);
+                        }
+                    }
+
+                    var genres to 
+                    foreach (var genre in currentMovie.Genres)
+                    {
+                        if (existingGenres.Contains(genre))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            currentMovie.Genres.Remove(genre);
+                        }
+                    }
+
+                    foreach (var genre in existingGenres)
+                    {
+                        if (currentMovie.Genres.Contains(genre))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            currentMovie.Genres.Add(genre);
+                        }
+                    }
+
+                    currentMovie.Name = movie.Name;
+                    currentMovie.Description = movie.Description;
+                    currentMovie.ReleaseDate = movie.ReleaseDate;
+                    currentMovie.ImgUrl = movie.ImgUrl;
+                    currentMovie.TrailerUrl = movie.TrailerUrl;
+
+                    try
+                    {
+                        this.moviesRepo.Update(currentMovie);
+                        this.saver.Save();
+                    }
+                    catch (Exception ex)
+                    {
+                        result.ErrorMsg = ex.Message;
+                        result.ResulType = ResultType.Error;
+                    }
+                }
+                else
+                {
+                    result.ErrorMsg = ErrorMessages.ErorsDict[ResultType.NoChanges];
+                    result.ResulType = ResultType.NoChanges;
+                }
+            }
+            else
+            {
+                result.ErrorMsg = ErrorMessages.ErorsDict[ResultType.DoesntExists];
+                result.ResulType = ResultType.DoesntExists;
+            }
 
             return result;
         }

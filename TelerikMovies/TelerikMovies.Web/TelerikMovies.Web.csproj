@@ -202,6 +202,7 @@
     <Compile Include="Areas\Admin\Models\Contracts\IDataTableViewModel.cs" />
     <Compile Include="Areas\Admin\Models\GenresViewModel.cs" />
     <Compile Include="Areas\Admin\Models\GridMovieViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\MoviesEditViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -516,10 +517,11 @@
     <Content Include="Scripts\materialize.js" />
     <Content Include="Scripts\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\PageScripts\create-genre.js" />
-    <Content Include="Scripts\PageScripts\all-movies-admin.js" />
-    <Content Include="Scripts\PageScripts\create-movie.js" />
-    <Content Include="Scripts\PageScripts\main-admin.js" />
+    <Content Include="Scripts\PageScripts\Admin\create-genre.js" />
+    <Content Include="Scripts\PageScripts\Admin\all-movies-admin.js" />
+    <Content Include="Scripts\PageScripts\Admin\create-movie.js" />
+    <Content Include="Scripts\PageScripts\Admin\edit-movie.js" />
+    <Content Include="Scripts\PageScripts\Admin\main-admin.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />

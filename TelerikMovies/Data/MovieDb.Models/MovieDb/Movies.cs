@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using TelerikMovies.Models.Abstract;
 using TelerikMovies.Models.Contracts;
 namespace TelerikMovies.Models
@@ -68,6 +69,29 @@ namespace TelerikMovies.Models
         {
             get { return this.genres; }
             set { this.genres = value; }
+        }
+
+        public bool CompareMoviesWith(Movies movie)
+        {
+            if (movie == null)
+            {
+                return false;
+            }
+            else
+            {
+                if (movie.Name != this.Name || movie.ReleaseDate != this.ReleaseDate
+                    || movie.TrailerUrl != this.TrailerUrl || movie.ImgUrl != this.ImgUrl
+                    || movie.Description != this.Description)
+                    return false;
+
+                if (movie.Genres.Where(x => this.Genres.FirstOrDefault(y => y.Name == x.Name) == null).Count() != 0)
+                    return false;
+
+                if (this.Genres.Where(x => movie.Genres.FirstOrDefault(y => y.Name == x.Name) == null).Count() != 0)
+                    return false;
+            }
+            
+            return true;
         }
     }
 }

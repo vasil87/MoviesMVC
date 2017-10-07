@@ -130,7 +130,7 @@
             return false;
         }
 
-        window.location.replace(urlToEdit + ids[0]);
+        window.location.replace(urlToEdit + '/'+ids[0]);
 
     });
 

@@ -8,6 +8,7 @@ namespace Common.Enums
         Fail=3,
         AlreadyExists=4,
         DoesntExists=5,
-        AlreadyDeleted=6
+        AlreadyDeleted=6,
+        NoChanges=7,
     }
 }

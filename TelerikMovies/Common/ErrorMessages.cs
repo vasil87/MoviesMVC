@@ -14,7 +14,11 @@ namespace Common
              {ResultType.Fail,"It seems the operation failed" },
              {ResultType.Success,"Operation successful" },
              {ResultType.AlreadyDeleted,"It seems this entity is already deleted" },
-             
+             {ResultType.NoChanges,"There are no changes made" },
+
         };
+
+        public const string InvalidUrl = "This is not a valid Url";
+
     }
 }

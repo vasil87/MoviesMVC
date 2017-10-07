@@ -1,9 +1,10 @@
 ﻿@{
     ViewBag.Title = "All Movies";
     var url = @String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~")) + "Admin/Movies/AllMoviesJson";
-    var deleteRowsUrl= @String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~")) + "Admin/Movies/Delete";
-    var undoDelete = @String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~")) + "Admin/Movies/UndoDelete";
-    var editMovie = @String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~")) + "Admin/Movies/Edit/";
+    var deleteRowsUrl = Url.Action("Delete", "Movies");
+    var undoDelete = Url.Action("UndoDelete", "Movies");
+    var editMovie = Url.Action("Edit", "Movies");
+    //var editMovie = @String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~")) + "Admin/Movies/Edit/";
 }
 
 <h2>All Movies</h2>
@@ -39,7 +40,7 @@
 
 @section scripts {
     @Scripts.Render("~/bundles/data-tables")
-    <script src="~/Scripts/PageScripts/all-movies-admin.js"></script>
+    <script src="~/Scripts/PageScripts/Admin/all-movies-admin.js"></script>
 }
 
 @section css {
