@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using TelerikMovies.Models.Abstract;
+using TelerikMovies.Models.Contracts;
 
 namespace TelerikMovies.Models
 {
-    public class Genres:BaseInfoModel
+    public class Genres:BaseInfoModel, ITraceable
     {
         private ICollection<Movies> movies;
         public Genres()

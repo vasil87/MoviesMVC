@@ -3,20 +3,14 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
-
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        @Html.AntiForgeryToken()
+            <li class="center-align"><span>@User.Identity.GetUserName()</span></li>
+            <li><a class="waves-effect waves-light btn pink accent-1" href="@Url.Action("Index", "Manage")" id="registerLink" title="Manage"><i class='material-icons left'>settings_applications</i>Manage</a></li>             
+            <li><a class="waves-effect waves-light btn pink accent-1" href="javascript:document.getElementById('logoutForm').submit()"><i class='material-icons left'>power_settings_new</i>Log off</a></li>
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+        <li><a class="waves-effect waves-light btn pink accent-1" href="@Url.Action("Register", "Account")" id="registerLink" title="Register"><i class='material-icons left'>person_add</i>Register</a></li>
+        <li><a class="waves-effect waves-light btn pink accent-1" href="@Url.Action("Login", "Account")" id="loginLink" title="Log in"><i class='material-icons left'>person</i>Login</a></li>
 }

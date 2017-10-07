@@ -6,7 +6,7 @@ using TelerikMovies.Models.Abstract;
 using TelerikMovies.Models.Contracts;
 namespace TelerikMovies.Models
 {
-    public class Movies:BaseInfoModel, IAuditable, IDeletable
+    public class Movies:BaseInfoModel, IAuditable, IDeletable, ITraceable
     {
         private ICollection<Comments> comments;
         private ICollection<Likes> likes;

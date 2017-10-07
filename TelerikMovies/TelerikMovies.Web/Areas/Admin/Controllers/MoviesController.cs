@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using Common;
 using Common.Enums;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -69,7 +70,7 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
             var result=Guid.TryParse(id, out Id);
             if (id == null || Id==null || result==false)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest,"Should Send Id");
+                return View("404");
             }
 
             var movie = this.moviesSV.GetMovieById(Id, true);
@@ -82,7 +83,7 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "No such id");
+                return View("404");
             }
            
             return View(model);
@@ -163,8 +164,6 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
 
             return new HttpStatusCodeResult(HttpStatusCode.OK, "Successfully removed");
         }
-
-
 
     }
 }

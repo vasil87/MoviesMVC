@@ -4,32 +4,27 @@ using Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TelerikMovies.Data.Contracts;
 using TelerikMovies.Models;
 using TelerikMovies.Services.Contracts;
 
 namespace TelerikMovies.Services
 {
-    public class MoviesService : IMoviesService
+    public class MoviesService :DataBaseService, IMoviesService
     {
-        private readonly IGenreService genresSv;
-        private readonly IEfGenericRepository<Movies> moviesRepo;
-        private readonly IUoW saver;
-
-        public MoviesService(IEfGenericRepository<Movies> movies, IUoW saver, IGenreService genres)
+        public MoviesService(IEfGenericRepository<Movies> movies, IEfGenericRepository<Genres> genresRepo,
+            IEfGenericRepository<Comments> commentsRepo, IEfGenericRepository<Users> userRepo,
+            IEfGenericRepository<Likes> likesRepo, IEfGenericRepository<Dislikes> dislikesRepo, IUoW saver) 
+            :base( movies,genresRepo,commentsRepo,userRepo, likesRepo, dislikesRepo, saver)
         {
-            this.genresSv = genres;
-            this.moviesRepo = movies;
-            this.saver = saver;
+
         }
 
         public IResult AddMovie(Movies movie)
         {
             var result = new Result("Success", ResultType.Success);
 
-            var currentMovie = this.moviesRepo.All().Where(x => x.Name.ToLower() == movie.Name.ToLower()).FirstOrDefault();
+            var currentMovie = this.MoviesRepo.All().Where(x => x.Name.ToLower() == movie.Name.ToLower()).FirstOrDefault();
 
             if (currentMovie == null)
             {
@@ -37,7 +32,7 @@ namespace TelerikMovies.Services
 
                 foreach (var genre in movie.Genres)
                 {
-                    var genreToAdd = this.genresSv.GetGenreByName(genre.Name);
+                    var genreToAdd = this.GenresRepo.All().Where(x => x.Name.ToLower() == genre.Name.ToLower()).FirstOrDefault();
                     if (genreToAdd != null)
                     {
                         existingGenres.Add(genreToAdd);
@@ -53,8 +48,8 @@ namespace TelerikMovies.Services
                 {
 
                     movie.Genres = existingGenres;
-                    this.moviesRepo.Add(movie);
-                    this.saver.Save();
+                    this.MoviesRepo.Add(movie);
+                    this.Saver.Save();
                 }
                 catch (Exception ex)
                 {
@@ -74,11 +69,11 @@ namespace TelerikMovies.Services
 
         public ICollection<Movies> GetAllAndDeleted()
         {
-            return this.moviesRepo.All().ToList();
+            return this.MoviesRepo.All().ToList();
         }
         public Movies GetMovieById(Guid id, bool getDeleted = false)
         {
-            var curentMovie = this.moviesRepo.GetById(id);
+            var curentMovie = this.MoviesRepo.GetById(id);
 
             if (getDeleted)
             {
@@ -101,7 +96,7 @@ namespace TelerikMovies.Services
         {
             var result = new Result(ResultType.Success);
 
-            var curentMovie = this.moviesRepo.GetById(id);
+            var curentMovie = this.MoviesRepo.GetById(id);
             var isDeleted = curentMovie.IsDeleted;
 
             if (isDeleted)
@@ -115,8 +110,8 @@ namespace TelerikMovies.Services
 
                 try
                 {
-                    this.moviesRepo.Delete(curentMovie);
-                    this.saver.Save();
+                    this.MoviesRepo.Delete(curentMovie);
+                    this.Saver.Save();
                 }
                 catch (Exception ex)
                 {
@@ -136,7 +131,7 @@ namespace TelerikMovies.Services
         {
             var result = new Result(ResultType.Success);
 
-            var curentMovie = this.moviesRepo.GetById(id);
+            var curentMovie = this.MoviesRepo.GetById(id);
             var isDeleted = curentMovie.IsDeleted;
 
             if (!isDeleted)
@@ -151,8 +146,8 @@ namespace TelerikMovies.Services
                 try
                 {
                     curentMovie.IsDeleted = false;
-                    this.moviesRepo.Update(curentMovie);
-                    this.saver.Save();
+                    this.MoviesRepo.Update(curentMovie);
+                    this.Saver.Save();
                 }
                 catch (Exception ex)
                 {
@@ -166,61 +161,13 @@ namespace TelerikMovies.Services
             }
 
             return result;
-        }
-
-        public IResult EditMovieById(Guid id)
-        {
-            var result = new Result("Success", ResultType.Success);
-
-            //var currentMovie = this.moviesRepo.All().Where(x => x.Name.ToLower() == movie.Name.ToLower()).FirstOrDefault();
-
-            //var existingGenres = new HashSet<Genres>();
-
-            //foreach (var genre in movie.Genres)
-            //{
-            //    var genreToAdd = this.genresSv.GetGenreByName(genre.Name);
-            //    if (genreToAdd != null)
-            //    {
-            //        existingGenres.Add(genreToAdd);
-
-            //    }
-            //    else
-            //    {
-            //        existingGenres.Add(genre);
-            //    }
-            //}
-
-
-            //if (currentMovie == null)
-            //{
-            //    try
-            //    {
-
-            //        movie.Genres = existingGenres;
-            //        this.moviesRepo.Add(movie);
-            //        this.saver.Save();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        result.ErrorMsg = ex.Message;
-            //        result.ResulType = ResultType.Error;
-            //    }
-
-            //}
-            //else
-            //{
-            //    result.ErrorMsg = "Already Exists";
-            //    result.ResulType = ResultType.AlreadyExists;
-            //}
-
-            return result;
-        }
+        }   
 
         public IResult UpdateMovie(Movies movie)
         {
             var result = new Result("Success", ResultType.Success);
 
-            var currentMovie = this.moviesRepo.GetById(movie.Id);
+            var currentMovie = this.MoviesRepo.GetById(movie.Id);
 
 
             if (currentMovie != null)
@@ -228,46 +175,7 @@ namespace TelerikMovies.Services
                 var areSame = movie.CompareMoviesWith(currentMovie);
                 if (!areSame)
                 {
-                    var existingGenres = new HashSet<Genres>();
-
-                    foreach (var genre in movie.Genres)
-                    {
-                        var genreToAdd = this.genresSv.GetGenreByName(genre.Name);
-                        if (genreToAdd != null)
-                        {
-                            existingGenres.Add(genreToAdd);
-
-                        }
-                        else
-                        {
-                            existingGenres.Add(genre);
-                        }
-                    }
-
-                    var genres to 
-                    foreach (var genre in currentMovie.Genres)
-                    {
-                        if (existingGenres.Contains(genre))
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            currentMovie.Genres.Remove(genre);
-                        }
-                    }
-
-                    foreach (var genre in existingGenres)
-                    {
-                        if (currentMovie.Genres.Contains(genre))
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            currentMovie.Genres.Add(genre);
-                        }
-                    }
+                    UpdateGenresCollection(currentMovie.Genres, movie.Genres);
 
                     currentMovie.Name = movie.Name;
                     currentMovie.Description = movie.Description;
@@ -277,8 +185,8 @@ namespace TelerikMovies.Services
 
                     try
                     {
-                        this.moviesRepo.Update(currentMovie);
-                        this.saver.Save();
+                        this.MoviesRepo.Update(currentMovie);
+                        this.Saver.Save();
                     }
                     catch (Exception ex)
                     {

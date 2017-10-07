@@ -30,6 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +47,7 @@
     <Compile Include="Contracts\IGenreService.cs" />
     <Compile Include="Contracts\IMoviesService.cs" />
     <Compile Include="Contracts\IService.cs" />
+    <Compile Include="DataBaseService.cs" />
     <Compile Include="GenreService.cs" />
     <Compile Include="MoviesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

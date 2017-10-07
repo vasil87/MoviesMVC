@@ -19,6 +19,13 @@
         $('#loader').hide();
 
         $(document).on('click', '.delete-genre', function () {
+            if ($($(this).prevAll('.autocomplete')[0]).attr('name')=='Genres[1].Name' && $('input[name="Genres[2].Name"]').length > 0)
+            {
+                var $input = $('input[name="Genres[2].Name"]')
+                $input.attr('name', 'Genres[1].Name');
+                $input.attr('id', 'Genre2');
+                $input.prev().attr('for', 'Genre2');
+            }
             $(this).parents('div.genre').remove();
             if (!$('#AddGenre').is(":visible")) {
                 $('#AddGenre').show();

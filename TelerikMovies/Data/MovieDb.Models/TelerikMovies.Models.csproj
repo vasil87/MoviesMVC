@@ -76,6 +76,7 @@
     <Compile Include="Abstracts\BaseInfoModel.cs" />
     <Compile Include="Contracts\IAuditable.cs" />
     <Compile Include="Contracts\IDeletable.cs" />
+    <Compile Include="Contracts\ITraceable.cs" />
     <Compile Include="MovieDb\Comments.cs" />
     <Compile Include="MovieDb\Dislikes.cs" />
     <Compile Include="MovieDb\Genres.cs" />

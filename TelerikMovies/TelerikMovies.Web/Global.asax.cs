@@ -6,6 +6,8 @@ using System.Web.Routing;
 using TelerikMovies.Data.Migrations;
 using TelerikMovies.Data;
 using TelerikMovies.Web.ForumSystem.Web.App_Start;
+using System;
+using System.Web;
 
 namespace TelerikMovies.Web
 {
@@ -22,6 +24,41 @@ namespace TelerikMovies.Web
 
             var mapper = new AutoMapperConfig();
             mapper.Execute(Assembly.GetExecutingAssembly());
+        }
+
+        protected void Application_Error()
+        {
+            if (Context.IsCustomErrorEnabled)
+            {
+                ShowCustomErrorPage(Server.GetLastError());
+            }
+        }
+
+        private void ShowCustomErrorPage(Exception exception)
+        {
+            var httpException = exception as HttpException ?? new HttpException(500, "Internal Server Error", exception);
+
+            Response.Clear();
+            var routeData = new RouteData();
+            routeData.Values.Add("controller", "Error");
+            routeData.Values.Add("fromAppErrorEvent", true);
+
+            switch (httpException.GetHttpCode())
+            {
+                case 404:
+                    routeData.Values.Add("action", "NotFound");
+                    break;
+                case 500:
+                default:
+                    routeData.Values.Add("action", "GeneralError");
+                    routeData.Values.Add("httpStatusCode", httpException.GetHttpCode());
+                    break;
+            }
+
+            Server.ClearError();
+
+            IController controller = ControllerBuilder.Current.GetControllerFactory().CreateController(new RequestContext() { RouteData = routeData }, "Error");
+            controller.Execute(new RequestContext(new HttpContextWrapper(Context), routeData));
         }
     }
 }

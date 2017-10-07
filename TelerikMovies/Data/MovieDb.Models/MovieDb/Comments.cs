@@ -4,7 +4,7 @@
     using Contracts;
     using System.ComponentModel.DataAnnotations;
 
-    public class Comments: BaseInfoModel,IDeletable, IAuditable
+    public class Comments: BaseInfoModel,IDeletable, IAuditable, ITraceable
     {
 
         [MaxLength(500)]

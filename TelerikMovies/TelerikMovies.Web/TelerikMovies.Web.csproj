@@ -204,6 +204,7 @@
     <Compile Include="Areas\Admin\Models\GridMovieViewModel.cs" />
     <Compile Include="Areas\Admin\Models\MoviesEditViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
@@ -391,6 +392,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Img\Logo.png" />
+    <Content Include="Img\portrait-photo_vasil.png" />
+    <Content Include="Img\profile__icons-facebook.png" />
+    <Content Include="Img\profile__icons-github.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -522,6 +526,7 @@
     <Content Include="Scripts\PageScripts\Admin\create-movie.js" />
     <Content Include="Scripts\PageScripts\Admin\edit-movie.js" />
     <Content Include="Scripts\PageScripts\Admin\main-admin.js" />
+    <Content Include="Scripts\PageScripts\main.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -561,6 +566,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\404.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <None Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Shared\_Loader.cshtml" />
+    <Content Include="Views\Shared\_Messages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

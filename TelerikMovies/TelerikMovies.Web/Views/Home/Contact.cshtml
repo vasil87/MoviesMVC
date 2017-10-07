@@ -1,17 +1,28 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Contacts";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+
+<div class="row">
+    <div class="col-offset-1 col s5">
+        <h2>@ViewBag.Title</h2>
+    </div>
+    <div class="col s6">
+        <div class="card">
+            <div class="card-image">
+                <img src="~/Img/portrait-photo_vasil.png">
+                <span class="card-title">Vasil Kamburov</span>
+            </div>
+            <div class="card-content">
+                <p>
+                    Dedicated Developer!Loves MVC and Angular!
+                </p>
+            </div>
+            <div class="card-action">
+                <a href="https://www.facebook.com/vasil.kamburov"><img src="~/Img/profile__icons-facebook.png" alt="facebook" class="profile__icons"></a>
+                <a href="https://github.com/vasil87 "><img src="~/Img/profile__icons-github.png" alt="github" class="profile__icons "></a>
+            </div>
+        </div>
+    </div>
+</div>

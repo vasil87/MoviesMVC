@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Object messages = ViewBag.Result;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,39 +10,65 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    @RenderSection("css", required: false)
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/materialize")
+    <div class="navbar-fixed">
+        <nav class="purple lighten-1">
+            <div class="nav-wrapper">
+                <a href="/home/index" class="brand-logo left">
+                    <img class="logo" src="~/Img/Logo.png" />
+                </a>
+                <a href="#" data-activates="mobile-menu" class="button-collapse right"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="hide-on-med-and-down right">
+                    @Html.Partial("_LoginPartial")
                 </ul>
-                @Html.Partial("_LoginPartial")
+            </div>
+        </nav>
+    </div>
+    <ul class="side-nav secondary-color" id="mobile-menu">
+        <li>
+            <h5 class="center">
+                <span class="purple-text text-lighten-1"><i class="material-icons">folder_shared</i>Menu</span>
+            </h5>
+            <div class="divider"></div>
+        </li>
+        @Html.Partial("_LoginPartial")
+    </ul>
+    <div class="container">
+        <div class="offset-s2 col s8">
+            <br />
+            @if (messages != null)
+            {
+                Html.RenderPartial("_Messages", messages);
+            }
+            @Html.Partial("_Loader")
+            <div class="main-content">
+                @RenderBody()
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    <footer class="page-footer  pink accent-1">
+        <div class="footer-copyright">
+            <div class="row">
+                <div class="col s12 center-align">
+                    <a class="waves-effect waves-light btn btn-flat" href="@Url.Action("Contact", "Home")" title="Contact"><i class='material-icons left'>contact_mail</i>Contact</a>
+                    <a class="waves-effect waves-light btn btn-flat" href="@Url.Action("About", "Home")" title="About"><i class='material-icons left'>info</i>About</a>
+                </div>
+                <div class="col s12">
+                    <div class="container">
+                        <hr />
+                        <p class="center-align">&copy; @DateTime.Now.Year - MovieHub All RIGHTS RESERVED</p>
+                    </div>
+                </div>
+            </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+        </div>
+    </footer>
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/PageScripts/main.js"></script>
 </body>
 </html>
