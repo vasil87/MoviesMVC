@@ -19,5 +19,7 @@ namespace TelerikMovies.Services.Contracts
         IResult UpdateMovie(Movies movie);
         ICollection<Movies> GetTopMovies();
         ICollection<Movies> GetRandomMovies(int moviesForCarouselCount);
+        ICollection<Movies> SearchForMovies(string search);
+       
     }
 }

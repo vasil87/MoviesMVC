@@ -5,6 +5,15 @@
     margin-top:5%;
     margin-bottom:5%;
 }
+
+.overlay {
+  position: absolute;
+  bottom: 2%;
+  left: 2%;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 4px 8px;
+  margin: 0;
+}
 .logo {
     margin-left: 1em;
     width: 50%;
@@ -13,13 +22,13 @@
     -webkit-transform: rotate(-7deg); /* Chrome, Safari, Opera */
     transform: rotate(-7deg);
 }
-.footer-button:hover {
+
+.footer-button:hover,#fab-search:hover {
     background-color:#ff4081;
 }
 .primary-color {
     background-color:#ab47bc;
 }
-
 .secondary-color {
     background-color:#ffd600;
 }

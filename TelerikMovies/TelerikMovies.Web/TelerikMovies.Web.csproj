@@ -216,12 +216,15 @@
     <Compile Include="Infrastructure\QueryableExtensions.cs" />
     <Compile Include="Models\Account\AccountInfoEditViewModel.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
+    <Compile Include="Models\Comments\CreateCommentModel.cs" />
+    <Compile Include="Models\Comments\DeleteCommentModel.cs" />
     <Compile Include="Models\Manage\IndexViewModel.cs" />
     <Compile Include="Models\Account\RegisterViewModel.cs" />
     <Compile Include="Areas\Admin\Models\GenreCreateViewModel.cs" />
     <Compile Include="Models\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="Areas\Admin\Models\MovieCreateViewModel.cs" />
-    <Compile Include="Models\Movie\IndexMoviesViewModel.cs" />
+    <Compile Include="Models\Movie\DetailedMovieViewModel.cs" />
+    <Compile Include="Models\Movie\MovieLikeDislikeModel.cs" />
     <Compile Include="Models\Movie\SimpleMovieViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -392,6 +395,7 @@
     <Content Include="Content\materialize.min.css" />
     <Content Include="Content\PageCss\all-movies-admin.css" />
     <Content Include="Content\PageCss\Create.css" />
+    <Content Include="Content\PageCss\movies-index.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -534,6 +538,7 @@
     <Content Include="Scripts\PageScripts\Admin\edit-movie.js" />
     <Content Include="Scripts\PageScripts\Admin\main-admin.js" />
     <Content Include="Scripts\PageScripts\edit-user.js" />
+    <Content Include="Scripts\PageScripts\details-movie.js" />
     <Content Include="Scripts\PageScripts\main.js" />
     <Content Include="Scripts\PageScripts\movies-index.js" />
     <Content Include="Scripts\respond.js" />
@@ -570,6 +575,7 @@
     <Content Include="Views\Movies\Index.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Shared\_Carousel.cshtml" />
+    <Content Include="Views\Shared\_TopMovies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

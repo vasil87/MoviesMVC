@@ -29,14 +29,37 @@ namespace TelerikMovies.Web.Controllers
         }
         public ActionResult Index()
         {
-            var model = new IndexMoviesViewModel();
-            var topMovies = this.moviesSv.GetTopMovies().Select(x => Mapper.Map<SimpleMovieViewModel>(x)).ToList();
-            var RandomMovies = this.moviesSv.GetRandomMovies(MoviesForCarouselCount).Select(x => Mapper.Map<SimpleMovieViewModel>(x)).ToList();
-
-            model.MoviesForCarousel = RandomMovies;
-            model.TopNewMovies = topMovies;
-
-            return View(model);
+            return View();
         }
+        [ChildActionOnly]
+        //[OutputCache(Duration = 600)]
+        public ActionResult RenderCarousel()
+        {
+            var RandomMovies = this.moviesSv.GetRandomMovies(MoviesForCarouselCount).Select(x => Mapper.Map<SimpleMovieViewModel>(x)).ToList();
+            return PartialView("_Carousel", RandomMovies);
+        }
+        [ChildActionOnly]
+        //[OutputCache(Duration = 300)]
+        public ActionResult RenderTopMovies()
+        {
+            var topMovies = this.moviesSv.GetTopMovies().Select(x => Mapper.Map<SimpleMovieViewModel>(x)).ToList();
+            return PartialView("_TopMovies", topMovies);
+        }
+
+        public ActionResult Details()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult Search(string searchValue)
+        {
+            var movies = this.moviesSv.SearchForMovies(searchValue).Select(x => Mapper.Map<SimpleMovieViewModel>(x)).ToList();
+            return PartialView("_TopMovies",movies);
+        }
+
+
+
+
     }
 }

@@ -21,7 +21,7 @@ C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\bin\D
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\bin\Debug\System.Web.Http.xml
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\Debug\TelerikMovies.Data.csprojResolveAssemblyReference.cache
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\Debug\TelerikMovies.Data.Migrations.initial.resources
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\Debug\TelerikMovies.Data.Migrations.DeletedLikesAddedImgUser.resources
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\Debug\TelerikMovies.Data.csproj.GenerateResource.Cache
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\Debug\TelerikMovies.Data.dll
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\Debug\TelerikMovies.Data.pdb
-C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\Debug\TelerikMovies.Data.Migrations.DeletedLikesAddedImgUser.resources

@@ -1,7 +1,53 @@
-﻿
+﻿@model TelerikMovies.Web.Models.Movie.DetailedMovieViewModel
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
+
+<div class="row">
+    <div class="col s4 left left-align z-depth-5 portrait">
+        <div class="container">
+                <img id="movie-photo" class="materialboxed responsive-img"  width="250" src="@(Model.ImgUrl)" />
+        </div>
+    </div>
+    <div class="col s7 offset-s1  grey lighten-4 z-depth-5">
+        @using (Html.BeginForm("Edit", "Account", FormMethod.Post, new { role = "form", @class = "show-loader" }))
+        {
+            @Html.AntiForgeryToken()
+            <h4>Edit your accout info</h4>
+            <hr />
+            @Html.ValidationSummary("", new { @class = "red-text text-darken-4" })
+            <div class="row">
+                <div class="input-field offset-s1 col s10">
+                    @Html.DisplayNameFor(m => m.Name);
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field offset-s1 col s10">
+                     @Html.DisplayFor(m => m.ReleaseDate);
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field offset-s1 col s10">
+                    @Html.DisplayFor(m => m.Description);
+                </div>
+            </div>
+                @Html.Hidden(User.)
+              
+                <div class="row">
+                    <div class="input-field offset-s1 col s10 name-container">
+                        <button class="btn waves-effect waves-light  yellow accent-4" type="submit" name="action">
+                            Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/PageScripts/details-movie.js"></script>
+}

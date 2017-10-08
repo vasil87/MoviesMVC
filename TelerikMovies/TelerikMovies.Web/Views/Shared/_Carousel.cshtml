@@ -1,9 +1,19 @@
 ﻿@model ICollection<TelerikMovies.Web.Models.Movie.SimpleMovieViewModel>
 
-<div class="carousel">
-    @foreach (var movie in Model)
-    {
-        <a class="carousel-item movie" data-id="@movie.Id" href="#one!"><img src="@movie.ImgUrl"></a>
-        <p class="white-text">@movie.Name</p>
-    }
+
+<div class="row">
+    <div class="col s12">
+        <div class="carousel medium">
+            @foreach (var movie in Model)
+            {
+                <a class="carousel-item movie align-center" data-id="@movie.Id" href="#one!">
+                    <p class="overlay white-text">@movie.Name</p>
+                    <div class="container">
+                        <img class="responsive-img" src="@movie.ImgUrl">
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
 </div>
+
