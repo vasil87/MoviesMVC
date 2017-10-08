@@ -207,6 +207,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -216,8 +217,9 @@
     <Compile Include="Infrastructure\QueryableExtensions.cs" />
     <Compile Include="Models\Account\AccountInfoEditViewModel.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
-    <Compile Include="Models\Comments\CreateCommentModel.cs" />
-    <Compile Include="Models\Comments\DeleteCommentModel.cs" />
+    <Compile Include="Models\Comment\CommentForMoviesViewModel.cs" />
+    <Compile Include="Models\Comment\CreateCommentViewModel.cs" />
+    <Compile Include="Models\Comment\DeleteCommentViewModel.cs" />
     <Compile Include="Models\Manage\IndexViewModel.cs" />
     <Compile Include="Models\Account\RegisterViewModel.cs" />
     <Compile Include="Areas\Admin\Models\GenreCreateViewModel.cs" />
@@ -395,6 +397,7 @@
     <Content Include="Content\materialize.min.css" />
     <Content Include="Content\PageCss\all-movies-admin.css" />
     <Content Include="Content\PageCss\Create.css" />
+    <Content Include="Content\PageCss\detail-movie.css" />
     <Content Include="Content\PageCss\movies-index.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -569,13 +572,14 @@
     <Content Include="Views\Shared\404.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Comments\GetAllNotDeletedCommentsForAMovie.cshtml" />
     <None Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Shared\_Loader.cshtml" />
     <Content Include="Views\Shared\_Messages.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
-    <Content Include="Views\Shared\_Carousel.cshtml" />
-    <Content Include="Views\Shared\_TopMovies.cshtml" />
+    <Content Include="Views\Movies\_Carousel.cshtml" />
+    <Content Include="Views\Movies\_TopMovies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

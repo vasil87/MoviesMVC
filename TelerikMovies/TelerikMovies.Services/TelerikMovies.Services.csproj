@@ -48,8 +48,9 @@
     <Compile Include="Contracts\IMoviesService.cs" />
     <Compile Include="Contracts\IService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
-    <Compile Include="DataBaseService.cs" />
+    <Compile Include="Base\DataBaseService.cs" />
     <Compile Include="GenreService.cs" />
+    <Compile Include="Contracts\ICommentsService.cs" />
     <Compile Include="MoviesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsersService.cs" />

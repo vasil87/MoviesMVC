@@ -1,0 +1,21 @@
+﻿@model ICollection<TelerikMovies.Web.Models.Comment.CommentForMoviesViewModel>
+@{
+    var currentUser = User.Identity.Name.ToLower();
+}
+
+<div>
+    <ul class="collection with-header">
+        <li class="collection-header"><h4>Comments</h4></li>
+       @foreach (var comment in Model)
+       {
+        <li class="collection-item comment" data-user="@comment.UserName">
+            @if (currentUser == comment.UserName.ToLower())
+            {
+                    <i class="material-icons right red-text small">clear</i>
+            }
+            <img src="@comment.UserImgUrl" width="50" class="circle">
+            @comment.Comment
+        </li>
+       }
+    </ul>
+</div>

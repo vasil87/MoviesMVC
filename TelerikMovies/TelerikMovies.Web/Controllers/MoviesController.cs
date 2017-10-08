@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -46,9 +47,30 @@ namespace TelerikMovies.Web.Controllers
             return PartialView("_TopMovies", topMovies);
         }
 
-        public ActionResult Details()
+        [HttpGet]
+        public ActionResult Details(string id)
         {
-            return null;
+            Guid Id;
+            var result = Guid.TryParse(id, out Id);
+            if (id == null || Id == null || result == false)
+            {
+                return View("404");
+            }
+
+            var movie = this.moviesSv.GetMovieById(Id, true);
+
+            DetailedMovieViewModel model;
+
+            if (movie != null)
+            {
+                model = Mapper.Map<DetailedMovieViewModel>(movie);
+            }
+            else
+            {
+                return View("404");
+            }
+
+            return View(model);
         }
 
         [HttpPost]
