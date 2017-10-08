@@ -33,6 +33,8 @@ namespace TelerikMovies.Models
 
         public bool isMale { get; set; }
 
+        public string ImgUrl { get; set; }
+
         [DataType(DataType.DateTime)]
         public DateTime? CreatedOn { get; set; }
 
@@ -68,6 +70,23 @@ namespace TelerikMovies.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
             return userIdentity;
+        }
+
+        public bool CompareUserWith(Users user)
+        {
+            if (user == null)
+            {
+                return false;
+            }
+            else
+            {
+                if (user.FirstName != this.FirstName || user.LastName != this.LastName
+                    || user.ImgUrl != this.ImgUrl || user.isMale != this.isMale
+                    || user.City != this.City)
+                    return false;
+            }
+
+            return true;
         }
     }
 }

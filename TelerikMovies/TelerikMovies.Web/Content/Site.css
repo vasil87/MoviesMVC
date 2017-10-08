@@ -1,7 +1,10 @@
 ﻿body {
     font-family:Roboto;
 }
-
+.responsive-img {
+    margin-top:5%;
+    margin-bottom:5%;
+}
 .logo {
     margin-left: 1em;
     width: 50%;

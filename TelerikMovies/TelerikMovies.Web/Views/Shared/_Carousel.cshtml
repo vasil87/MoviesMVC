@@ -1,0 +1,9 @@
+﻿@model ICollection<TelerikMovies.Web.Models.Movie.SimpleMovieViewModel>
+
+<div class="carousel">
+    @foreach (var movie in Model)
+    {
+        <a class="carousel-item movie" data-id="@movie.Id" href="#one!"><img src="@movie.ImgUrl"></a>
+        <p class="white-text">@movie.Name</p>
+    }
+</div>

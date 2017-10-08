@@ -1,0 +1,18 @@
+﻿@model TelerikMovies.Web.Models.Movie.IndexMoviesViewModel
+@{
+    ViewBag.Title = "Movies";
+}
+
+<div class="row">
+    <div class="col s12">
+        @Html.Partial("_Carousel",Model.MoviesForCarousel)
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script src="~/Scripts/PageScripts/movies-index.js"></script>
+}
+
+

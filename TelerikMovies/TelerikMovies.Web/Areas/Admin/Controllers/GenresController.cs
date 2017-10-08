@@ -27,8 +27,7 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
         }
         public ActionResult Index()
         {
-            //var movies = this.movies.All().ToList();
-            return View();
+            return RedirectToAction("Create");
         }
 
         [HttpGet]

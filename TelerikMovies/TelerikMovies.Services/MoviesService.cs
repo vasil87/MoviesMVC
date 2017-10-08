@@ -208,5 +208,28 @@ namespace TelerikMovies.Services
 
             return result;
         }
+
+        public ICollection<Movies> GetTopMovies()
+        {
+            return this.MoviesRepo.AllNotDeleted().OrderBy(x => x.Likes.Count).Take(10).ToList();
+        }
+
+        public ICollection<Movies> GetRandomMovies(int moviesForCarouselCount)
+        {
+            Random rnd = new Random();
+
+            var movies = this.MoviesRepo.AllNotDeleted().ToList();
+
+            var result = new HashSet<Movies>();
+
+            for (int i = 0; i < moviesForCarouselCount; i++)
+            {
+                int r = rnd.Next(movies.Count);
+                result.Add(movies[r]);
+            }
+
+            return result;
+
+        }
     }
 }

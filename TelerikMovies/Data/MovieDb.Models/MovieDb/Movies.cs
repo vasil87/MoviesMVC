@@ -15,8 +15,6 @@ namespace TelerikMovies.Models
 
         public Movies()
         {
-            this.LikesNumber = 0;
-            this.DislikesNumber = 0;
             this.comments = new HashSet<Comments>();
             this.dislikes = new HashSet<Dislikes>();
             this.likes = new HashSet<Likes>();
@@ -44,9 +42,6 @@ namespace TelerikMovies.Models
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
 
-        public int LikesNumber { get; set; }
-
-        public int DislikesNumber { get; set; }
         public virtual ICollection<Comments> Comments
         {
             get { return this.comments; }

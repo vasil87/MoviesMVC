@@ -12,6 +12,8 @@ using TelerikMovies.Web.Models;
 using TelerikMovies.Models;
 using TelerikMovies.Services.Contracts;
 using AutoMapper;
+using Common.Enums;
+using Common;
 
 namespace TelerikMovies.Web.Controllers
 {
@@ -27,7 +29,7 @@ namespace TelerikMovies.Web.Controllers
             this.usersSv = usersSv;
         }
 
-        public AccountController(IUsersService usersSv,ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(IUsersService usersSv, ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             this.usersSv = usersSv;
             this.UserManager = userManager;
@@ -40,9 +42,9 @@ namespace TelerikMovies.Web.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -118,8 +120,8 @@ namespace TelerikMovies.Web.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -176,7 +178,7 @@ namespace TelerikMovies.Web.Controllers
         [HttpGet]
         public ActionResult Edit()
         {
-            var userName=this.HttpContext.User.Identity.GetUserName();
+            var userName = this.HttpContext.User.Identity.GetUserName();
             var existingUser = this.usersSv.GetByUserName(userName);
             var model = Mapper.Map<AccountInfoEditViewModel>(existingUser);
             return View(model);
@@ -185,7 +187,22 @@ namespace TelerikMovies.Web.Controllers
         [HttpPost]
         public ActionResult Edit(AccountInfoEditViewModel model)
         {
-            return View();
+            if (this.ModelState.IsValid)
+            {
+                var result = this.usersSv.UpdateUser(Mapper.Map<Users>(model));
+                if (result.ResulType == ResultType.Success)
+                {
+                    this.ModelState.Clear();
+                }
+                model.Result = result;
+            }
+            else {
+                var allErrorsAsString = this.ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage);
+                var errorResult = new Result(string.Join(Environment.NewLine, allErrorsAsString), ResultType.Error);
+                model.Result = errorResult;
+            }
+
+            return View(model);
         }
 
         #region Helpers
@@ -245,7 +262,7 @@ namespace TelerikMovies.Web.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
 
-          
+
         }
         #endregion
     }

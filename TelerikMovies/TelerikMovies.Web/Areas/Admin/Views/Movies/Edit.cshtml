@@ -16,8 +16,8 @@
         <h2>Edit Movie</h2>
         <hr />
         <br />
-        @using (Html.BeginForm("Edit", "Movies", FormMethod.Post, new { @class = "edit-movie-form" }))
-            {
+        @using (Html.BeginForm("Edit", "Movies", FormMethod.Post, new { @class = "edit-movie-form show-loader"}))
+        {
             @Html.AntiForgeryToken()
             @Html.HiddenFor(x => x.Id);
             <div class="row">

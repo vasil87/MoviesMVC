@@ -79,6 +79,10 @@
     <Compile Include="Migrations\201710011221428_initial.Designer.cs">
       <DependentUpon>201710011221428_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710080542253_DeletedLikesAddedImgUser.cs" />
+    <Compile Include="Migrations\201710080542253_DeletedLikesAddedImgUser.Designer.cs">
+      <DependentUpon>201710080542253_DeletedLikesAddedImgUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\EfGenericRepository.cs" />
     <Compile Include="Contracts\IMoviesContext.cs" />
@@ -104,6 +108,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710011221428_initial.resx">
       <DependentUpon>201710011221428_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710080542253_DeletedLikesAddedImgUser.resx">
+      <DependentUpon>201710080542253_DeletedLikesAddedImgUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

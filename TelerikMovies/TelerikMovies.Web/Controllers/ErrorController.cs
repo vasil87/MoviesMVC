@@ -11,7 +11,7 @@ namespace CoBuilder.GoBim.Web.Controllers
         public ActionResult Index()
         {
             Response.ContentType = "text/html";
-            return View();
+            return View("Index");
         }
 
         public ActionResult NotFound()

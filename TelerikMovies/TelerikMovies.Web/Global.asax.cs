@@ -50,8 +50,7 @@ namespace TelerikMovies.Web
                     break;
                 case 500:
                 default:
-                    routeData.Values.Add("action", "GeneralError");
-                    routeData.Values.Add("httpStatusCode", httpException.GetHttpCode());
+                    routeData.Values.Add("action", "Index");
                     break;
             }
 

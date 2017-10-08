@@ -17,5 +17,7 @@ namespace TelerikMovies.Services.Contracts
         Movies GetMovieById(Guid id, bool getDeleted = false);
 
         IResult UpdateMovie(Movies movie);
+        ICollection<Movies> GetTopMovies();
+        ICollection<Movies> GetRandomMovies(int moviesForCarouselCount);
     }
 }
