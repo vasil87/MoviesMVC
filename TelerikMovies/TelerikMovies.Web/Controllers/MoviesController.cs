@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Common;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -71,7 +70,6 @@ namespace TelerikMovies.Web.Controllers
                 return View("404");
             }
 
-            ViewData[Constants.UserImgUrl] = this.Session[Constants.UserImgUrl];
             return View(model);
         }
 
@@ -80,21 +78,6 @@ namespace TelerikMovies.Web.Controllers
         {
             var movies = this.moviesSv.SearchForMovies(searchValue).Select(x => Mapper.Map<SimpleMovieViewModel>(x)).ToList();
             return PartialView("_TopMovies",movies);
-        }
-
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            var userSv = (IUsersService)System.Web.Mvc.DependencyResolver.Current.GetService(typeof(IUsersService));
-            var userName = this.User.Identity.Name;
-
-            if (!string.IsNullOrWhiteSpace(userName))
-            {
-                var dbUser = userSv.GetByUserName(userName);
-                this.Session[Constants.UserImgUrl] = dbUser.ImgUrl;
-                this.Session[Constants.UserId] = dbUser.Id;
-            }
-
-            base.OnActionExecuting(filterContext);
         }
 
     }

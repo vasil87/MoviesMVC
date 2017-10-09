@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
     var id = Model.Id.ToString();
     var date = Model.ReleaseDate.ToString("dd MMM yyyy");
-    var userImgUrl = ViewData[Constants.UserImgUrl];
+    var userImgUrl = Session[Constants.UserImgUrl].ToString();
     var saveCommentUrl = Url.Action("SaveComment", "Comment");
     var deletCommentUrl = Url.Action("Delete", "Comment");
     var partialUrlForComments = Url.Action("GetAllNotDeletedCommentsForAMovie", "Comment", new { id = id });
