@@ -42,36 +42,37 @@ namespace TelerikMovies.Services
 
         public IResult SaveComment(Guid movieId, string userName, string text)
         {
-            var result = new Result();
+            return null;
+            //var result = new Result();
 
-            var currentUser = this.UserRepo.All().Where(x => x.UserName.ToLower() == userName.ToLower()).FirstOrDefault();
-            if (currentUser == null)
-            {
-                return result.ErrorMss=
-            }
-            var currentMovie = this.GetMovie(imdbId);
-            if (currentUser == null)
-            {
-                return this.BadRequest("No such movie");
-            }
+            //var currentUser = this.UserRepo.All().Where(x => x.UserName.ToLower() == userName.ToLower()).FirstOrDefault();
+            //if (currentUser == null)
+            //{
+            //    return result.ErrorMss=
+            //}
+            //var currentMovie = this.GetMovie(imdbId);
+            //if (currentUser == null)
+            //{
+            //    return this.BadRequest("No such movie");
+            //}
 
-            var comment = new Comments
-            {
-                Comment = text,
-                UsersId = userId,
-                MoviesId = currentMovie.Id
-            };
-            try
-            {
-                this.comments.Add(comment);
-                this.comments.SaveChanges();
-            }
-            catch
-            {
-                return this.BadRequest("Can`t save this comment");
-            }
+            //var comment = new Comments
+            //{
+            //    Comment = text,
+            //    UsersId = userId,
+            //    MoviesId = currentMovie.Id
+            //};
+            //try
+            //{
+            //    this.comments.Add(comment);
+            //    this.comments.SaveChanges();
+            //}
+            //catch
+            //{
+            //    return this.BadRequest("Can`t save this comment");
+            //}
 
-            var lastCommentId = this.comments.All().Where(x => x.UsersId == userId).OrderByDescending(x => x.CreatedOn).FirstOrDefault().Id;
+            //var lastCommentId = this.comments.All().Where(x => x.UsersId == userId).OrderByDescending(x => x.CreatedOn).FirstOrDefault().Id;
         }
     }
 }
