@@ -23,7 +23,7 @@ namespace TelerikMovies.Web.Models
         public bool isMale { get; set; }
 
         [MaxLength(500)]
-        [Url(ErrorMessage = ErrorMessages.InvalidUrl)]
+        [Url(ErrorMessage = Constants.InvalidUrl)]
         public string ImgUrl { get; set; }
     }
 }

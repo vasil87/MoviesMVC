@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTableOrderer.cs" />
-    <Compile Include="ErrorMessages.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="GenreComparer.cs" />
     <Compile Include="Contracts\ISettingsManager.cs" />
     <Compile Include="Enums\ResultType.cs" />

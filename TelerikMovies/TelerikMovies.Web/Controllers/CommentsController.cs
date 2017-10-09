@@ -31,5 +31,48 @@ namespace TelerikMovies.Web.Controllers
             return PartialView(comments);
         }
 
+        [HttpPost]
+        public ActionResult SaveComment(CreateCommentViewModel model)
+        {
+            var text = model.Comment;
+            var userName = model.UserName;
+            var imdbId = model.MovieId;
+
+            if (string.IsNullOrEmpty(text))
+            {
+                return this.BadRequest("Comment can`t be empty");
+            }
+            var currentUser = this.GetUser(userId);
+            if (currentUser == null)
+            {
+                return this.BadRequest("No such user");
+            }
+            var currentMovie = this.GetMovie(imdbId);
+            if (currentUser == null)
+            {
+                return this.BadRequest("No such movie");
+            }
+
+            var comment = new Comments
+            {
+                Comment = text,
+                UsersId = userId,
+                MoviesId = currentMovie.Id
+            };
+            try
+            {
+                this.comments.Add(comment);
+                this.comments.SaveChanges();
+            }
+            catch
+            {
+                return this.BadRequest("Can`t save this comment");
+            }
+
+            var lastCommentId = this.comments.All().Where(x => x.UsersId == userId).OrderByDescending(x => x.CreatedOn).FirstOrDefault().Id;
+
+            return this.Ok(lastCommentId);
+        }
+
     }
 }

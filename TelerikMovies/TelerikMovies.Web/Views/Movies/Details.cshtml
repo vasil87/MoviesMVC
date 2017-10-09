@@ -1,8 +1,13 @@
-﻿@model TelerikMovies.Web.Models.Movie.DetailedMovieViewModel
+﻿@using Common
+@model TelerikMovies.Web.Models.Movie.DetailedMovieViewModel
 @{
     ViewBag.Title = "Details";
     var id = Model.Id.ToString();
     var date = Model.ReleaseDate.ToString("dd MMM yyyy");
+    var userImgUrl = Session[Constants.UserImgUrl].ToString();
+    var saveCommentUrl = Url.Action("SaveComment", "Comment");
+    var deletCommentUrl = Url.Action("Delete", "Comment");
+    var partialUrlForComments = Url.Action("GetAllNotDeletedCommentsForAMovie", "Comment", new { id = id });
 }
 
 
@@ -40,10 +45,14 @@
             </div>
         </div>
         @Html.Action("GetAllNotDeletedCommentsForAMovie", "Comments", new { id = id })
-        @Html.Hidden(User.Identity.Name)
-        @Html.Hidden(id)
+        <input id="MovieId" type="hidden" value="@id" />
+        <input id="UserName" type="hidden" value="@User.Identity.Name" />
+        <input id="UserImgUrl" type="hidden" value="@userImgUrl" />
+        <input id="SaveCommentUrl" type="hidden" value="@saveCommentUrl" />
+        <input id="DeletCommentUrl" type="hidden" value="@deletCommentUrl" />
+        <input id="RenderPartialComments" type="hidden" vale="@partialUrlForComments" />
     </div>
-   
+
 </div>
 
 @section scripts {

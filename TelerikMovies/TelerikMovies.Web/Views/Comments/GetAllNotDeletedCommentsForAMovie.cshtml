@@ -3,19 +3,31 @@
     var currentUser = User.Identity.Name.ToLower();
 }
 
-<div>
-    <ul class="collection with-header">
-        <li class="collection-header"><h4>Comments</h4></li>
-       @foreach (var comment in Model)
-       {
-        <li class="collection-item comment" data-user="@comment.UserName">
-            @if (currentUser == comment.UserName.ToLower())
-            {
-                    <i class="material-icons right red-text small">clear</i>
-            }
-            <img src="@comment.UserImgUrl" width="50" class="circle">
-            @comment.Comment
+<div id="comments-container">
+    <ul id="movie-comments" class="collection with-header">
+        <li class="collection-header">
+            <div class="row">
+                <div class="col s6"><h4>Comments</h4></div>
+                <div class="col offset-s4 s2"><br /><a id="add-comment" class="btn-floating btn-large secondary-color" title="Add Comment"><i class="material-icons">add</i></a></div>
+            </div>  
         </li>
-       }
+        @foreach (var comment in Model)
+        {
+            <li class="collection-item comment avatar" data-user="@comment.UserName">
+                @if (currentUser == comment.UserName.ToLower())
+                {
+                    <i class="material-icons red-text small secondary-content">clear</i>
+                }
+                <img src="@comment.UserImgUrl" width="50" class="circle">
+                @if (@comment.Comment.Length > 99)
+                {
+                    <p><br /><h6 class="truncate collapsable-comment">@comment.Comment</h6></p>
+                }
+                else
+                {
+                    <p><br />@comment.Comment</p>
+                }
+            </li>
+        }
     </ul>
 </div>

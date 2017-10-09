@@ -29,7 +29,7 @@ namespace Common
             {
                 if (string.IsNullOrWhiteSpace(errorMsg))
                 {
-                    return ErrorMessages.ErorsDict[this.ResulType];
+                    return Constants.ErorsDict[this.ResulType];
                 }
                 return this.errorMsg;
             }

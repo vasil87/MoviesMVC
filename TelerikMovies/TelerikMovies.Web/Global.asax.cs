@@ -8,6 +8,8 @@ using TelerikMovies.Data;
 using TelerikMovies.Web.ForumSystem.Web.App_Start;
 using System;
 using System.Web;
+using TelerikMovies.Services.Contracts;
+using Common;
 
 namespace TelerikMovies.Web
 {
@@ -25,7 +27,15 @@ namespace TelerikMovies.Web
             var mapper = new AutoMapperConfig();
             mapper.Execute(Assembly.GetExecutingAssembly());
         }
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            var userSv= (IUsersService)System.Web.Mvc.DependencyResolver.Current.GetService(typeof(IUsersService));
+            var userName = this.User.Identity.Name;
+            var dbUser = userSv.GetByUserName(userName);
 
+            this.Session[Constants.UserImgUrl] = dbUser.ImgUrl;
+            this.Session[Constants.UserId] = dbUser.Id;
+        }
         protected void Application_Error()
         {
             if (Context.IsCustomErrorEnabled)
@@ -59,5 +69,7 @@ namespace TelerikMovies.Web
             IController controller = ControllerBuilder.Current.GetControllerFactory().CreateController(new RequestContext() { RouteData = routeData }, "Error");
             controller.Execute(new RequestContext(new HttpContextWrapper(Context), routeData));
         }
+
+        
     }
 }

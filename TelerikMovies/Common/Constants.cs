@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Common
 {
-    public static class ErrorMessages
+    public static class Constants
     {
         public static Dictionary<ResultType, string> ErorsDict = new Dictionary<ResultType, string>()
         {
@@ -19,6 +19,8 @@ namespace Common
         };
 
         public const string InvalidUrl = "This is not a valid Url";
-
+        public const string UserImgUrl = "UserImgUrl";
+        public const string UserId = "UserId";
+        public const string EmptyRequest="Comments can`t be empty";
     }
 }

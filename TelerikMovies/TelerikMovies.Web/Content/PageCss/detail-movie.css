@@ -1,3 +1,32 @@
 ﻿.movie-foto-container {
-    margin-top:5%;
+    margin-top: 5%;
+}
+
+.collapsable-comment {
+    cursor: pointer;
+}
+
+.btn-floating.btn-large.secondary-color:hover,#confirm-comment:hover {
+    background-color: #ff80ab;
+}
+
+#comment-add {
+    height:35px !important;
+    display: block;
+    padding: 8px 8px 8px 72px;
+    width: 100%;
+    /*background: rgba(255,255,255,0.3);*/
+    -webkit-transition: all 200ms ease;
+    transition: all 200ms ease;
+    border: none;
+    font-size: 20px;
+    appearance: textfield;
+    font-weight: 400;
+    outline: none;
+    border-radius: 3px;
+    overflow-wrap:break-word;
+}
+
+#comment-add:focus {
+    border-bottom: none!important;
 }

@@ -28,12 +28,12 @@ namespace TelerikMovies.Web.Areas.Admin.Models
 
         [Required]
         [MaxLength(500)]
-        [Url(ErrorMessage = ErrorMessages.InvalidUrl)]
+        [Url(ErrorMessage = Constants.InvalidUrl)]
         public string ImgUrl { get; set; }
 
         [Required]
         [MaxLength(500)]
-        [Url(ErrorMessage = ErrorMessages.InvalidUrl)]
+        [Url(ErrorMessage = Constants.InvalidUrl)]
         public string TrailerUrl { get; set; }
 
         [Required]

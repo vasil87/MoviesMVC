@@ -196,13 +196,13 @@ namespace TelerikMovies.Services
                 }
                 else
                 {
-                    result.ErrorMsg = ErrorMessages.ErorsDict[ResultType.NoChanges];
+                    result.ErrorMsg = Constants.ErorsDict[ResultType.NoChanges];
                     result.ResulType = ResultType.NoChanges;
                 }
             }
             else
             {
-                result.ErrorMsg = ErrorMessages.ErorsDict[ResultType.DoesntExists];
+                result.ErrorMsg = Constants.ErorsDict[ResultType.DoesntExists];
                 result.ResulType = ResultType.DoesntExists;
             }
 

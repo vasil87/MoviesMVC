@@ -80,8 +80,5 @@ namespace TelerikMovies.Web.Controllers
             return PartialView("_TopMovies",movies);
         }
 
-
-
-
     }
 }

@@ -40,6 +40,39 @@ namespace TelerikMovies.Services
             return comments;
         }
 
+        public IResult SaveComment(Guid movieId, string userName, string text)
+        {
+            var result = new Result();
+
+            var currentUser = this.UserRepo.All().Where(x => x.UserName.ToLower() == userName.ToLower()).FirstOrDefault();
+            if (currentUser == null)
+            {
+                return result.ErrorMss=
+            }
+            var currentMovie = this.GetMovie(imdbId);
+            if (currentUser == null)
+            {
+                return this.BadRequest("No such movie");
+            }
+
+            var comment = new Comments
+            {
+                Comment = text,
+                UsersId = userId,
+                MoviesId = currentMovie.Id
+            };
+            try
+            {
+                this.comments.Add(comment);
+                this.comments.SaveChanges();
+            }
+            catch
+            {
+                return this.BadRequest("Can`t save this comment");
+            }
+
+            var lastCommentId = this.comments.All().Where(x => x.UsersId == userId).OrderByDescending(x => x.CreatedOn).FirstOrDefault().Id;
+        }
     }
 }
 
