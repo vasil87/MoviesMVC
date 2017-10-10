@@ -128,7 +128,7 @@
               Materialize.toast('Disliked successfully', 1000);
           }
       }).fail((errmessage) => {
-          Materialize.toast(statusText, 1000);
+          Materialize.toast(errmessage.statusText, 1000);
       });
   }
 

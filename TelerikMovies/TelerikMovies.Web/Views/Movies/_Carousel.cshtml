@@ -9,7 +9,7 @@
                 <a class="carousel-item movie align-center" data-id="@movie.Id" href="@Url.Action("Details","Movies",new { id=movie.Id})">
                     <p class="overlay white-text">@movie.Name</p>
                     <div class="container">
-                        <img class="responsive-img" src="@movie.ImgUrl">
+                        <img class="responsive-img z-depth-5" src="@movie.ImgUrl">
                     </div>
                 </a>
             }

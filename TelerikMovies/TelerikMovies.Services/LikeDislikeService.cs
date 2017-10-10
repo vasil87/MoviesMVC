@@ -55,7 +55,16 @@ namespace TelerikMovies.Services
                     this.DislikesRepo.Add(new Dislikes { User = currentUser, Movie = currentMovie });
                 }
 
-                this.Saver.Save();
+                try
+                {
+                    this.Saver.Save();
+
+                }
+                catch (Exception ex)
+                {
+                    result.ResulType = ResultType.Error;
+                    result.ErrorMsg = Constants.ErorsDict[ResultType.Error];
+                }
             }
             else
             {
@@ -71,7 +80,7 @@ namespace TelerikMovies.Services
 
             if (islikedOrDisliked == null)
             {
-                islikedOrDisliked = this.LikesRepo.All().Where(x => x.Movie.Id == movieId && x.User.UserName.ToLower() == userName.ToLower()).FirstOrDefault();
+                islikedOrDisliked = this.DislikesRepo.All().Where(x => x.Movie.Id == movieId && x.User.UserName.ToLower() == userName.ToLower()).FirstOrDefault();
             }
 
             if (islikedOrDisliked != null)

@@ -9,6 +9,15 @@
     cursor:pointer
 }
 
+.shadowed {
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
+}
+
+.title-shadow {
+   text-shadow: 4px 8px 13px #000
+}
+
 .overlay {
   position: absolute;
   bottom: 2%;

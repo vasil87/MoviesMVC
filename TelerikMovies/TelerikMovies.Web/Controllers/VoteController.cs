@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using TelerikMovies.Services.Contracts;
 using TelerikMovies.Web.Models;
+using TelerikMovies.Web.Models.LikesDislikes;
 
 namespace TelerikMovies.Web.Controllers
 {
@@ -21,21 +21,26 @@ namespace TelerikMovies.Web.Controllers
         }
      
         [HttpPost]
-        public ActionResult Like(IVoteModel vote)
+        public ActionResult Like(VoteViewModel vote)
         {
            return this.LikeOrDIslikeMovie(vote, true);
         }
         [HttpPost]
-        public ActionResult Dislike(IVoteModel vote)
+        public ActionResult Dislike(VoteViewModel vote)
         {
             return this.LikeOrDIslikeMovie(vote, false);
         }
 
-        private ActionResult LikeOrDIslikeMovie(IVoteModel vote,bool isItLike)
+        private ActionResult LikeOrDIslikeMovie(VoteViewModel vote,bool isItLike)
         {
-            if (vote.MovieId == null || vote.UserName==null || string.IsNullOrWhiteSpace(vote.UserName))
+            if (vote.MovieId == null )
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, Constants.EmptyRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, Constants.MovieNotExists);
+            }
+
+            if (vote.UserName == null || string.IsNullOrWhiteSpace(vote.UserName))
+            { 
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, Constants.UserNotExists);
             }
 
             var userName = vote.UserName;
