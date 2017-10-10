@@ -22,20 +22,64 @@ namespace TelerikMovies.Services
 
         }
 
+        public IResult DeleteComment(Guid commentId, string userName)
+        {
+            var result = new Result();
+
+            var currentComent = this.CommentsRepo.GetById(commentId);
+
+            if (currentComent == null || currentComent.IsDeleted==true)
+            {
+                result.ResulType = ResultType.DoesntExists;
+                result.ErrorMsg = Constants.ErorsDict[ResultType.DoesntExists];
+
+                return result;
+            }
+
+            var user = this.UserRepo.All().Where(x => x.UserName.ToLower() == userName.ToLower()).FirstOrDefault();
+
+
+            if (user == null)
+            {
+                result.ResulType = ResultType.DoesntExists;
+                result.ErrorMsg = Constants.ErorsDict[ResultType.DoesntExists];
+                return result;
+            }
+
+            if (currentComent.User.Id != user.Id)
+            {
+                result.ResulType = ResultType.Error;
+                result.ErrorMsg = Constants.ThisUserNotOwnComment;
+                return result;
+            }
+
+            try
+            {
+                this.CommentsRepo.Delete(currentComent);
+                this.Saver.Save();
+            }
+            catch (Exception ex)
+            {
+                result.ResulType = ResultType.Error;
+                result.ErrorMsg = ex.Message;
+            }
+
+            return result;
+        }
+
         public ICollection<Comments> GetCommentsForAMovie(Guid movieId, bool getDeleted)
         {
-            IQueryable<Comments> querry;
+            //IQueryable<Comments> querry;
+            ICollection<Comments> comments;
 
             if (getDeleted)
             {
-                querry = this.CommentsRepo.AllNotDeleted();
+                comments = this.CommentsRepo.All().Where(x => x.Movie.Id == movieId).OrderByDescending(x=>x.CreatedOn).ToList();
             }
             else
             {
-                querry = this.CommentsRepo.All();
+                comments = this.CommentsRepo.AllNotDeleted().Where(x => x.Movie.Id == movieId).OrderByDescending(x => x.CreatedOn).ToList();
             }
-
-            ICollection<Comments> comments = querry.Where(x => x.Movie.Id == movieId).ToList();
 
             return comments;
         }
@@ -45,33 +89,44 @@ namespace TelerikMovies.Services
             var result = new Result();
 
             var currentUser = this.UserRepo.All().Where(x => x.UserName.ToLower() == userName.ToLower()).FirstOrDefault();
+
             if (currentUser == null)
             {
-                return result.ErrorMss=
+                result.ResulType = ResultType.Error;
+                result.ErrorMsg = Constants.UserNotExists;
+
+                return result;
             }
-            var currentMovie = this.GetMovie(imdbId);
-            if (currentUser == null)
+
+            var currentMovie = this.MoviesRepo.GetById(movieId);
+
+            if (currentMovie == null)
             {
-                return this.BadRequest("No such movie");
+                result.ResulType = ResultType.Error;
+                result.ErrorMsg = Constants.MovieNotExists;
+
+                return result;
             }
 
             var comment = new Comments
             {
                 Comment = text,
-                UsersId = userId,
-                MoviesId = currentMovie.Id
+                User = currentUser,
+                Movie = currentMovie
             };
+
             try
             {
-                this.comments.Add(comment);
-                this.comments.SaveChanges();
+                this.CommentsRepo.Add(comment);
+                this.Saver.Save();
             }
-            catch
+            catch(Exception ex)
             {
-                return this.BadRequest("Can`t save this comment");
+                result.ResulType = ResultType.Error;
+                result.ErrorMsg = ex.Message;
             }
 
-            var lastCommentId = this.comments.All().Where(x => x.UsersId == userId).OrderByDescending(x => x.CreatedOn).FirstOrDefault().Id;
+            return result;
         }
     }
 }

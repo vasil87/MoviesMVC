@@ -27,15 +27,7 @@ namespace TelerikMovies.Web
             var mapper = new AutoMapperConfig();
             mapper.Execute(Assembly.GetExecutingAssembly());
         }
-        protected void Session_Start(object sender, EventArgs e)
-        {
-            var userSv= (IUsersService)System.Web.Mvc.DependencyResolver.Current.GetService(typeof(IUsersService));
-            var userName = this.User.Identity.Name;
-            var dbUser = userSv.GetByUserName(userName);
 
-            this.Session[Constants.UserImgUrl] = dbUser.ImgUrl;
-            this.Session[Constants.UserId] = dbUser.Id;
-        }
         protected void Application_Error()
         {
             if (Context.IsCustomErrorEnabled)

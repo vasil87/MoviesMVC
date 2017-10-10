@@ -2,10 +2,6 @@
     margin-top: 5%;
 }
 
-.collapsable-comment {
-    cursor: pointer;
-}
-
 .btn-floating.btn-large.secondary-color:hover,#confirm-comment:hover {
     background-color: #ff80ab;
 }
@@ -20,7 +16,6 @@
     transition: all 200ms ease;
     border: none;
     font-size: 20px;
-    appearance: textfield;
     font-weight: 400;
     outline: none;
     border-radius: 3px;
@@ -29,4 +24,15 @@
 
 #comment-add:focus {
     border-bottom: none!important;
+}
+
+
+.collapsable-comment,.stop-comment, .delete-comment {
+cursor: pointer;
+}
+
+.show-comment-container {
+    width:80%;
+     word-break: break-all;
+    overflow-wrap:break-word;
 }

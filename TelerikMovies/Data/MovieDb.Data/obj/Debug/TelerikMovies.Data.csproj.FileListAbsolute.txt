@@ -25,3 +25,5 @@ C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\D
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\Debug\TelerikMovies.Data.csproj.GenerateResource.Cache
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\Debug\TelerikMovies.Data.dll
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\Debug\TelerikMovies.Data.pdb
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\bin\Debug\Common.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\bin\Debug\Common.pdb

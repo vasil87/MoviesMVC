@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
+using Common;
+using Common.Contracts;
+using Common.Enums;
 using System;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using TelerikMovies.Services.Contracts;
 using TelerikMovies.Web.Models.Comment;
@@ -34,44 +38,61 @@ namespace TelerikMovies.Web.Controllers
         [HttpPost]
         public ActionResult SaveComment(CreateCommentViewModel model)
         {
-            var text = model.Comment;
+            if (model.Comment == null || string.IsNullOrWhiteSpace(model.Comment))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, Constants.EmptyRequest);
+            }
+
+            var text = model.Comment.Trim();
             var userName = model.UserName;
-            var imdbId = model.MovieId;
+            var movieId = model.MovieId;
 
-            if (string.IsNullOrEmpty(text))
+          
+            var result = this.commentsSv.SaveComment(movieId, userName, text);
+
+            HttpStatusCode stCode=HttpStatusCode.OK;
+
+            if (result.ResulType != ResultType.Success)
             {
-                return this.BadRequest("Comment can`t be empty");
-            }
-            var currentUser = this.GetUser(userId);
-            if (currentUser == null)
-            {
-                return this.BadRequest("No such user");
-            }
-            var currentMovie = this.GetMovie(imdbId);
-            if (currentUser == null)
-            {
-                return this.BadRequest("No such movie");
+                stCode = HttpStatusCode.InternalServerError;
             }
 
-            var comment = new Comments
+            return new HttpStatusCodeResult(stCode, result.ErrorMsg);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteComment(string commentId, string userName)
+        {
+            HttpStatusCode stCode = HttpStatusCode.OK;
+            IResult result = new Result();
+
+            if (commentId == null || string.IsNullOrWhiteSpace(commentId) || userName == null || string.IsNullOrWhiteSpace(userName))
             {
-                Comment = text,
-                UsersId = userId,
-                MoviesId = currentMovie.Id
-            };
-            try
-            {
-                this.comments.Add(comment);
-                this.comments.SaveChanges();
+                    stCode = HttpStatusCode.BadRequest;
+                    result.ErrorMsg = Constants.UserNotExists + " or " + Constants.MovieNotExists;
             }
-            catch
+            else
             {
-                return this.BadRequest("Can`t save this comment");
+                Guid commentIdGuid;
+
+                if (Guid.TryParse(commentId, out commentIdGuid))
+                { 
+                
+                    result = this.commentsSv.DeleteComment(commentIdGuid, userName);
+
+                    if (result.ResulType != ResultType.Success)
+                    {
+                        stCode = HttpStatusCode.InternalServerError;
+                    }
+                }
+                else
+                {
+                    stCode = HttpStatusCode.BadRequest;
+                    result.ErrorMsg = Constants.InvalidCommentId;
+                }
             }
 
-            var lastCommentId = this.comments.All().Where(x => x.UsersId == userId).OrderByDescending(x => x.CreatedOn).FirstOrDefault().Id;
-
-            return this.Ok(lastCommentId);
+            return new HttpStatusCodeResult(stCode, result.ErrorMsg);
         }
 
     }

@@ -211,7 +211,7 @@ namespace TelerikMovies.Services
 
         public ICollection<Movies> GetTopMovies()
         {
-            return this.MoviesRepo.AllNotDeleted().OrderBy(x => x.Likes.Count).Take(8).ToList();
+            return this.MoviesRepo.AllNotDeleted().OrderByDescending(x => x.Likes.Count).Take(8).ToList();
         }
 
         public ICollection<Movies> GetRandomMovies(int moviesForCarouselCount)

@@ -4,10 +4,14 @@
     ViewBag.Title = "Details";
     var id = Model.Id.ToString();
     var date = Model.ReleaseDate.ToString("dd MMM yyyy");
-    var userImgUrl = Session[Constants.UserImgUrl].ToString();
-    var saveCommentUrl = Url.Action("SaveComment", "Comment");
-    var deletCommentUrl = Url.Action("Delete", "Comment");
-    var partialUrlForComments = Url.Action("GetAllNotDeletedCommentsForAMovie", "Comment", new { id = id });
+    var userImgUrl = Session[Constants.UserImgUrl]?.ToString() ?? Url.Content("~/Img/no-image.png");
+    var saveCommentUrl = Url.Action("SaveComment", "Comments");
+    var deletCommentUrl = Url.Action("DeleteComment", "Comments");
+    var partialUrlForComments = Url.Action("GetAllNotDeletedCommentsForAMovie", "Comments", new { id = id });
+    var genres = string.Join("  , ", Model.Genres.Select(x => x.Name));
+    var likeAMovie = Url.Action("Like", "Vote");
+    var dislikeAMovie = Url.Action("Dislike", "Vote");
+
 }
 
 
@@ -15,28 +19,34 @@
 <div class="row">
     <div class="col s12 m12 l5">
         <div class="container movie-foto-container">
-            <img id="movie-photo" class="materialboxed responsive-img" width="270" src="@(Model.ImgUrl)" />
+            <img id="movie-photo" class="materialboxed responsive-img z-depth-5" width="270" src="@(Model.ImgUrl)" />
         </div>
+        <br />
         <div class="row">
-            <div class="input-field offset-s2 col s9">
+            <div class="offset-s2 col s9">
                 <span>Release Date: @date</span>
             </div>
         </div>
         <div class="row">
-            <div class="offset-s3 col s3">
-                <i class="material-icons left vote">thumb_up</i>
-                @Model.Likes
+            <div class="offset-s2 col s9">
+                <span>Genres: @genres</span>
             </div>
-            <div class="col s3">
+        </div>
+        <div class="row">
+            <div id="like-movie" class="offset-s3 col s3">
+                <i class="material-icons left vote">thumb_up</i>
+                <span id="like-numbers">@Model.Likes</span>
+            </div>
+            <div id="dislike-movie" class="col s3">
                 <i class="material-icons left vote">thumb_down</i>
-                @Model.Dislikes
+                <span id="dislike-numbers">@Model.Dislikes</span>
             </div>
         </div>
     </div>
     <div class="col s12 m12 l7">
         <h4>@Model.Name</h4>
-        <div class="video-container">
-            <iframe width="100%" height="auto" src="@Model.TrailerUrl" frameborder="0" allowfullscreen></iframe>
+        <div class="video-container z-depth-5">
+            <iframe src="@Model.TrailerUrl" frameborder="0" allowfullscreen></iframe>
         </div>
         <div class="row">
             <div class="input-field col s12">
@@ -50,7 +60,9 @@
         <input id="UserImgUrl" type="hidden" value="@userImgUrl" />
         <input id="SaveCommentUrl" type="hidden" value="@saveCommentUrl" />
         <input id="DeletCommentUrl" type="hidden" value="@deletCommentUrl" />
-        <input id="RenderPartialComments" type="hidden" vale="@partialUrlForComments" />
+        <input id="RenderPartialComments" type="hidden" value="@partialUrlForComments" />
+        <input id="LikeAMovieUrl" type="hidden" value="@likeAMovie" />
+        <input id="DislikeAMovieUrl" type="hidden" value="@dislikeAMovie" />
     </div>
 
 </div>

@@ -9,5 +9,6 @@ namespace TelerikMovies.Services.Contracts
     {
         ICollection<Comments> GetCommentsForAMovie(Guid id, bool getDeleted);
         IResult SaveComment(Guid movieId, string userName, string text);
+        IResult DeleteComment(Guid commentId,string userName);
     }
 }

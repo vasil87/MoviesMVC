@@ -13,20 +13,23 @@
         </li>
         @foreach (var comment in Model)
         {
+            var urlImg = comment.UserImgUrl?.ToString() ?? Url.Content("~/Img/no-image.png");
+
             <li class="collection-item comment avatar" data-user="@comment.UserName">
                 @if (currentUser == comment.UserName.ToLower())
                 {
-                    <i class="material-icons red-text small secondary-content">clear</i>
+                    <i class="material-icons red-text small secondary-content delete-comment">clear</i>
                 }
-                <img src="@comment.UserImgUrl" width="50" class="circle">
-                @if (@comment.Comment.Length > 99)
+                <img src="@urlImg" width="50" class="circle">
+                @if (@comment.Comment.Length >50)
                 {
-                    <p><br /><h6 class="truncate collapsable-comment">@comment.Comment</h6></p>
+                    <p><br /><div class="show-comment-container"><h6 class="truncate collapsable-comment">@comment.Comment</h6></div></p>
                 }
                 else
                 {
                     <p><br />@comment.Comment</p>
                 }
+                <input class="comment-id" type="hidden" value="@comment.Id">
             </li>
         }
     </ul>

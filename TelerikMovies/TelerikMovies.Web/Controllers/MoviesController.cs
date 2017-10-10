@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Common;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -25,7 +26,7 @@ namespace TelerikMovies.Web.Controllers
         public MoviesController(IMoviesService moviesSv)
         {
             this.moviesSv = moviesSv;
-           
+
 
         }
         public ActionResult Index()
@@ -77,7 +78,23 @@ namespace TelerikMovies.Web.Controllers
         public ActionResult Search(string searchValue)
         {
             var movies = this.moviesSv.SearchForMovies(searchValue).Select(x => Mapper.Map<SimpleMovieViewModel>(x)).ToList();
-            return PartialView("_TopMovies",movies);
+            return PartialView("_TopMovies", movies);
+        }
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            var userName = this.User.Identity.Name;
+            if (userName != null && !string.IsNullOrWhiteSpace(userName))
+            {
+                var userSv = (IUsersService)System.Web.Mvc.DependencyResolver.Current.GetService(typeof(IUsersService));
+
+                var dbUser = userSv.GetByUserName(userName);
+
+                this.Session[Constants.UserImgUrl] = dbUser.ImgUrl;
+                this.Session[Constants.UserId] = dbUser.Id;
+
+            }
+            base.OnActionExecuting(filterContext);
         }
 
     }

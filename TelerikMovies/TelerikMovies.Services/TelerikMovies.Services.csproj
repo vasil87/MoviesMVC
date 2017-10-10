@@ -42,13 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountService.cs" />
     <Compile Include="CommentsService.cs" />
     <Compile Include="Contracts\IGenreService.cs" />
+    <Compile Include="Contracts\ILikeDislikeService.cs" />
     <Compile Include="Contracts\IMoviesService.cs" />
     <Compile Include="Contracts\IService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
     <Compile Include="Base\DataBaseService.cs" />
+    <Compile Include="LikeDislikeService.cs" />
     <Compile Include="GenreService.cs" />
     <Compile Include="Contracts\ICommentsService.cs" />
     <Compile Include="MoviesService.cs" />
