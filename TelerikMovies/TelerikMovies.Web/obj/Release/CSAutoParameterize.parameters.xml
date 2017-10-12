@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="MoviesConnection-Web.config Connection String" description="MoviesConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDB)\v11.0;Initial Catalog=TelerikAcademyMovies;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Vasil\\Desktop\\gitmovies\\MoviesMVC\\TelerikMovies\\TelerikMovies\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MoviesConnection']/@connectionString" />
+  </parameter>
+</parameters>

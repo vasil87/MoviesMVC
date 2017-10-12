@@ -11,6 +11,7 @@ using TelerikMovies.Web.Models.Comment;
 
 namespace TelerikMovies.Web.Controllers
 {
+    [Authorize]
     public class CommentsController : Controller
     {
         private ICommentsService commentsSv;

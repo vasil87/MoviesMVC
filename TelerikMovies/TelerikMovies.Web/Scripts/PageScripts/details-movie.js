@@ -124,7 +124,7 @@
           } else {
               let current = Number($('#dislike-numbers').text());
               current += 1;
-              $('#like-numbers').text(current);
+              $('#dislike-numbers').text(current);
               Materialize.toast('Disliked successfully', 1000);
           }
       }).fail((errmessage) => {

@@ -13,6 +13,7 @@ using TelerikMovies.Web.Models.Movie;
 
 namespace TelerikMovies.Web.Controllers
 {
+  
     public class MoviesController : Controller
     {
         private IMoviesService moviesSv;
@@ -34,20 +35,21 @@ namespace TelerikMovies.Web.Controllers
             return View();
         }
         [ChildActionOnly]
-        //[OutputCache(Duration = 600)]
+        [OutputCache(Duration = 60)]
         public ActionResult RenderCarousel()
         {
             var RandomMovies = this.moviesSv.GetRandomMovies(MoviesForCarouselCount).Select(x => Mapper.Map<SimpleMovieViewModel>(x)).ToList();
             return PartialView("_Carousel", RandomMovies);
         }
         [ChildActionOnly]
-        //[OutputCache(Duration = 300)]
+        [OutputCache(Duration = 30)]
         public ActionResult RenderTopMovies()
         {
             var topMovies = this.moviesSv.GetTopMovies().Select(x => Mapper.Map<SimpleMovieViewModel>(x)).ToList();
             return PartialView("_TopMovies", topMovies);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Details(string id)
         {

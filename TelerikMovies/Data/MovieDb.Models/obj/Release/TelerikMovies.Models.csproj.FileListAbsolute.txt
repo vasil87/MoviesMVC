@@ -19,3 +19,4 @@ C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Models\bin
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Models\bin\Release\System.Web.Http.xml
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Models\obj\Release\TelerikMovies.Models.dll
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Models\obj\Release\TelerikMovies.Models.pdb
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Models\obj\Release\TelerikMovies.Models.csprojResolveAssemblyReference.cache

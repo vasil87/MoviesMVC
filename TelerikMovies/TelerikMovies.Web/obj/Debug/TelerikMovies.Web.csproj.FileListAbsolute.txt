@@ -86,3 +86,10 @@ C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Web\bin\M
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Web\obj\Debug\TelerikMovies.Web.csprojResolveAssemblyReference.cache
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Web\obj\Debug\TelerikMovies.Web.dll
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Web\obj\Debug\TelerikMovies.Web.pdb
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Web\bin\Content\DataTables\images\details_close.png
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Web\bin\Content\DataTables\images\details_open.png
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Web\bin\Content\DataTables\images\sort_asc.png
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Web\bin\Content\DataTables\images\sort_asc_disabled.png
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Web\bin\Content\DataTables\images\sort_both.png
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Web\bin\Content\DataTables\images\sort_desc.png
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Web\bin\Content\DataTables\images\sort_desc_disabled.png

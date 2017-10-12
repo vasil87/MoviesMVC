@@ -386,13 +386,27 @@
     <Content Include="Content\DataTables\css\select.jqueryui.min.css" />
     <Content Include="Content\DataTables\css\select.semanticui.css" />
     <Content Include="Content\DataTables\css\select.semanticui.min.css" />
-    <Content Include="Content\DataTables\images\details_close.png" />
-    <Content Include="Content\DataTables\images\details_open.png" />
-    <Content Include="Content\DataTables\images\sort_asc.png" />
-    <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
-    <Content Include="Content\DataTables\images\sort_both.png" />
-    <Content Include="Content\DataTables\images\sort_desc.png" />
-    <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables\images\details_close.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\DataTables\images\details_open.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\DataTables\images\sort_asc.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\DataTables\images\sort_asc_disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\DataTables\images\sort_both.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\DataTables\images\sort_desc.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\DataTables\images\sort_desc_disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\materialize.css" />
     <Content Include="Content\materialize.min.css" />
@@ -404,28 +418,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Img\Logo.png" />
-    <Content Include="Img\lost-season-six.jpg" />
-    <Content Include="Img\no-image.png" />
-    <Content Include="Img\portrait-photo_vasil.png" />
-    <Content Include="Img\profile__icons-facebook.png" />
-    <Content Include="Img\profile__icons-github.png" />
+    <Content Include="Images\details_close.png" />
+    <Content Include="Images\details_open.png" />
+    <Content Include="Images\Logo.png" />
+    <Content Include="Images\lost-season-six.jpg" />
+    <Content Include="Images\no-image.png" />
+    <Content Include="Images\portrait-photo_vasil.png" />
+    <Content Include="Images\profile__icons-facebook.png" />
+    <Content Include="Images\profile__icons-github.png" />
+    <Content Include="Images\sort_asc.png" />
+    <Content Include="Images\sort_asc_disabled.png" />
+    <Content Include="Images\sort_both.png" />
+    <Content Include="Images\sort_desc.png" />
+    <Content Include="Images\sort_desc_disabled.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Movies\Create.cshtml" />
-    <Content Include="fonts\Roboto-Bold.woff" />
-    <Content Include="fonts\Roboto-Bold.woff2" />
-    <Content Include="fonts\Roboto-Light.woff" />
-    <Content Include="fonts\Roboto-Light.woff2" />
-    <Content Include="fonts\Roboto-Medium.woff" />
-    <Content Include="fonts\Roboto-Medium.woff2" />
-    <Content Include="fonts\Roboto-Regular.woff" />
-    <Content Include="fonts\Roboto-Regular.woff2" />
-    <Content Include="fonts\Roboto-Thin.woff" />
-    <Content Include="fonts\Roboto-Thin.woff2" />
     <Content Include="Areas\Admin\Views\Shared\_Loader.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Messages.cshtml" />
     <Content Include="Areas\Admin\Views\Genres\Create.cshtml" />
@@ -442,6 +453,21 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Areas\Admin\Views\Movies\Edit.cshtml" />
+    <Content Include="fonts\roboto\Roboto-Bold.woff" />
+    <Content Include="fonts\roboto\Roboto-Bold.woff2" />
+    <Content Include="fonts\roboto\Roboto-Light.woff" />
+    <Content Include="fonts\roboto\Roboto-Light.woff2" />
+    <Content Include="fonts\roboto\Roboto-Medium.woff" />
+    <Content Include="fonts\roboto\Roboto-Medium.woff2" />
+    <Content Include="fonts\roboto\Roboto-Regular.woff" />
+    <Content Include="fonts\roboto\Roboto-Regular.woff2" />
+    <Content Include="fonts\roboto\Roboto-Thin.woff" />
+    <Content Include="fonts\roboto\Roboto-Thin.woff2" />
+    <None Include="Properties\PublishProfiles\telerikmovies - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\telerikmovies - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\telerikmovies - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\telerikmovies - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\vasil.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -567,7 +593,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\404.cshtml" />

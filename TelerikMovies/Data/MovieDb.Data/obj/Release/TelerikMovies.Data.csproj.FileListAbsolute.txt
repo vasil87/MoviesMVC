@@ -24,3 +24,6 @@ C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\R
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\Release\TelerikMovies.Data.csproj.GenerateResource.Cache
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\Release\TelerikMovies.Data.dll
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\Release\TelerikMovies.Data.pdb
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\bin\Release\Common.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\bin\Release\Common.pdb
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Data\obj\Release\TelerikMovies.Data.Migrations.DeletedLikesAddedImgUser.resources

@@ -11,6 +11,7 @@ using TelerikMovies.Web.Models.LikesDislikes;
 
 namespace TelerikMovies.Web.Controllers
 {
+    [Authorize]
     public class VoteController : Controller
     {
         private readonly ILikeDislikeService likeDislikeSv;

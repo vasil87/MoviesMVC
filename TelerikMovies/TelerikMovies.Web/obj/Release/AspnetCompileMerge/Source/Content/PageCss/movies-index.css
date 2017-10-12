@@ -1,0 +1,15 @@
+﻿.material-icons.prefix.medium.movie-search-icon.active {
+    color:yellow;
+}
+.margin-top-02 {
+    margin-top:0.2%;
+}
+
+.carousel {
+    min-height:600px;
+}
+
+.carousel .carousel-item {
+min-height:350px !important;
+min-width:350px !important;
+}

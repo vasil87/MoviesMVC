@@ -1,0 +1,22 @@
+﻿@model TelerikMovies.Web.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Change password:</dt>
+        <dd>
+            <a class="waves-effect waves-light btn btn-flat yellow accent-1" href="@Url.Action("ChangePassword", "Manage")" title="Edit Info"><i class='material-icons left'>account_circle</i>Password</a>
+        </dd>
+        <dt>Change Profile info</dt>
+        <dd>
+           <a class="waves-effect waves-light btn btn-flat yellow accent-1" href="@Url.Action("Edit", "Account")" title="Edit Info"><i class='material-icons left'>account_circle</i>Edit Info</a>
+        </dd>
+    </dl>
+</div>
