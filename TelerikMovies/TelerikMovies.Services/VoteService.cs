@@ -11,9 +11,9 @@ using TelerikMovies.Services.Contracts;
 namespace TelerikMovies.Services
 
 {
-    public class LikeDislikeService : DataBaseService, ILikeDislikeService
+    public class VoteService : DataBaseService, IVoteService
     {
-        public LikeDislikeService(IEfGenericRepository<Movies> movies, IEfGenericRepository<Genres> genresRepo,
+        public VoteService(IEfGenericRepository<Movies> movies, IEfGenericRepository<Genres> genresRepo,
                                   IEfGenericRepository<Comments> commentsRepo, IEfGenericRepository<Users> userRepo,
                                   IEfGenericRepository<Likes> likesRepo, IEfGenericRepository<Dislikes> dislikesRepo, IUoW saver)
                                   : base(movies, genresRepo, commentsRepo, userRepo, likesRepo, dislikesRepo, saver)

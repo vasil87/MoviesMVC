@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
+using Bytes2you.Validation;
 using Common;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
-using TelerikMovies.Data.Contracts;
-using TelerikMovies.Models;
 using TelerikMovies.Services.Contracts;
-using TelerikMovies.Web.Models;
 using TelerikMovies.Web.Models.Movie;
 
 namespace TelerikMovies.Web.Controllers
@@ -26,9 +23,8 @@ namespace TelerikMovies.Web.Controllers
 
         public MoviesController(IMoviesService moviesSv)
         {
+            Guard.WhenArgument(moviesSv, ServicesNames.MoviesService.ToString()).IsNull().Throw();
             this.moviesSv = moviesSv;
-
-
         }
         public ActionResult Index()
         {

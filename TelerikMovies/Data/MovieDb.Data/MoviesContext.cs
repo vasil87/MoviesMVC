@@ -23,6 +23,10 @@
             this.ApplyAuditInfoRules();
             return base.SaveChanges();
         }
+        public static MoviesContext Create()
+        {
+            return new MoviesContext();
+        }
         private void ApplyAuditInfoRules()
         {
             foreach (var entry in
@@ -53,12 +57,8 @@
                 if (entity.DeletedOn != null && entity.IsDeleted == false)
                 {
                     entity.DeletedOn = null;
-                }     
+                }
             }
-        }
-        public static MoviesContext Create()
-        {
-            return new MoviesContext();
         }
     }
 }

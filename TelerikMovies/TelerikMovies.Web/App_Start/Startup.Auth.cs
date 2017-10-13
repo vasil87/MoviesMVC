@@ -7,6 +7,7 @@ using Owin;
 using TelerikMovies.Web.Models;
 using TelerikMovies.Models;
 using TelerikMovies.Data;
+using TelerikMovies.Services;
 
 namespace TelerikMovies.Web
 {

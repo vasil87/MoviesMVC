@@ -5,7 +5,7 @@ namespace TelerikMovies.Web
 {
     using System;
     using System.Web;
-
+    using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject.Extensions.Conventions;
     using Ninject;
@@ -19,6 +19,8 @@ namespace TelerikMovies.Web
     using Common;
     using System.Collections.Generic;
     using TelerikMovies.Models;
+    using Services;
+    using Services.Contracts.Auth;
     public static class DependencyInjectionConfig
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -83,6 +85,8 @@ namespace TelerikMovies.Web
                  .BindDefaultInterface();
             });
 
+            kernel.Bind<ISignInManagerService>().ToMethod(_ => HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>());
+            kernel.Bind<IUserManagerService>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
             kernel.Bind<IEqualityComparer<Genres>>().To<GenreComparer>();
             kernel.Bind<IMoviesContext>().To<MoviesContext>().InRequestScope();
             kernel.Bind(typeof(IEfGenericRepository<>)).To(typeof(EfGenericRepository<>));

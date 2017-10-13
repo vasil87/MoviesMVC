@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Web.Mvc;
-using TelerikMovies.Data.Contracts;
-using TelerikMovies.Models;
+﻿using System.Web.Mvc;
 
 namespace TelerikMovies.Web.Controllers
 {

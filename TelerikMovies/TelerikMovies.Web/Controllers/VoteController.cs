@@ -1,12 +1,10 @@
-﻿using Common;
+﻿using Bytes2you.Validation;
+using Common;
 using Common.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using TelerikMovies.Services.Contracts;
-using TelerikMovies.Web.Models;
+using TelerikMovies.Web.Infrastructure;
 using TelerikMovies.Web.Models.LikesDislikes;
 
 namespace TelerikMovies.Web.Controllers
@@ -14,24 +12,27 @@ namespace TelerikMovies.Web.Controllers
     [Authorize]
     public class VoteController : Controller
     {
-        private readonly ILikeDislikeService likeDislikeSv;
+        private readonly IVoteService voteSv;
 
-        public VoteController(ILikeDislikeService likeDIslikeSv)
+        public VoteController(IVoteService voteSv)
         {
-            this.likeDislikeSv = likeDIslikeSv;
+            Guard.WhenArgument(voteSv, ServicesNames.VoteService.ToString()).IsNull().Throw();
+            this.voteSv = voteSv;
         }
      
         [HttpPost]
+        [AjaxOnlyAttribute]
         public ActionResult Like(VoteViewModel vote)
         {
            return this.LikeOrDIslikeMovie(vote, true);
         }
         [HttpPost]
+        [AjaxOnlyAttribute]
         public ActionResult Dislike(VoteViewModel vote)
         {
             return this.LikeOrDIslikeMovie(vote, false);
         }
-
+        
         private ActionResult LikeOrDIslikeMovie(VoteViewModel vote,bool isItLike)
         {
             if (vote.MovieId == null )
@@ -47,7 +48,7 @@ namespace TelerikMovies.Web.Controllers
             var userName = vote.UserName;
             var movieId = vote.MovieId;
 
-            var result = this.likeDislikeSv.LikeOrDislikeAMovie(userName,movieId,isItLike);
+            var result = this.voteSv.LikeOrDislikeAMovie(userName,movieId,isItLike);
 
             HttpStatusCode stCode = HttpStatusCode.OK;
 

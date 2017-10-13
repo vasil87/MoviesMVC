@@ -83,3 +83,12 @@ C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Tests\bin
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Tests\obj\Debug\TelerikMovies.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Tests\obj\Debug\Movies.Tests.dll
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Tests\obj\Debug\Movies.Tests.pdb
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Tests\bin\Debug\Castle.Core.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Tests\bin\Debug\Moq.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Tests\bin\Debug\Bytes2you.Validation.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Tests\bin\Debug\Castle.Core.xml
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Tests\bin\Debug\Moq.pdb
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Tests\bin\Debug\Moq.xml
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Tests\bin\Debug\TestStack.FluentMVCTesting.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Tests\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.Tests\bin\Debug\Microsoft.Owin.Security.OAuth.xml

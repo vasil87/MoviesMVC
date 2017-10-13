@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Bytes2you.Validation;
 using Common;
 using Common.Contracts;
 using Common.Enums;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using TelerikMovies.Services.Contracts;
+using TelerikMovies.Web.Infrastructure;
 using TelerikMovies.Web.Models.Comment;
 
 namespace TelerikMovies.Web.Controllers
@@ -18,10 +20,12 @@ namespace TelerikMovies.Web.Controllers
 
         public CommentsController(ICommentsService commentsSv)
         {
+            Guard.WhenArgument(commentsSv, ServicesNames.CommentsService.ToString()).IsNull().Throw();
             this.commentsSv = commentsSv;
         }
 
         [HttpGet]
+        [AjaxOnlyAttribute]
         public ActionResult GetAllNotDeletedCommentsForAMovie(string id)
         {
             Guid Id;
@@ -36,7 +40,9 @@ namespace TelerikMovies.Web.Controllers
             return PartialView(comments);
         }
 
+
         [HttpPost]
+        [AjaxOnlyAttribute]
         public ActionResult SaveComment(CreateCommentViewModel model)
         {
             if (model.Comment == null || string.IsNullOrWhiteSpace(model.Comment))
@@ -62,6 +68,7 @@ namespace TelerikMovies.Web.Controllers
         }
 
         [HttpPost]
+        [AjaxOnlyAttribute]
         public ActionResult DeleteComment(string commentId, string userName)
         {
             HttpStatusCode stCode = HttpStatusCode.OK;

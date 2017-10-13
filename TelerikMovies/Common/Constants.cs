@@ -18,6 +18,10 @@ namespace Common
 
         };
 
+        //mvc managers
+        public const string UserManager = "UserManager";
+        public const string SignInManager = "SignInManager";
+
         //props
         public const string UserImgUrl = "UserImgUrl";
         public const string UserId = "UserId";

@@ -3,7 +3,7 @@ using System;
 
 namespace TelerikMovies.Services.Contracts
 {
-    public interface ILikeDislikeService
+    public interface IVoteService
     {
         IResult LikeOrDislikeAMovie(string userName, Guid movieId, bool isLike);
     }

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -14,50 +12,33 @@ using TelerikMovies.Services.Contracts;
 using AutoMapper;
 using Common.Enums;
 using Common;
+using Bytes2you.Validation;
+using TelerikMovies.Services.Contracts.Auth;
 
 namespace TelerikMovies.Web.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        private readonly ISignInManagerService signInService;
+        private readonly IUserManagerService userService;
         private readonly IUsersService usersSv;
 
         public AccountController(IUsersService usersSv)
         {
+            Guard.WhenArgument(usersSv,ServicesNames.UserService.ToString()).IsNull().Throw();
             this.usersSv = usersSv;
         }
 
-        public AccountController(IUsersService usersSv, ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(IUsersService usersSv, ISignInManagerService signInService, IUserManagerService userService)
         {
+            Guard.WhenArgument(usersSv, ServicesNames.UserService.ToString()).IsNull().Throw();
+            Guard.WhenArgument(userService, Common.Constants.UserManager).IsNull().Throw();
+            Guard.WhenArgument(signInService, Common.Constants.SignInManager).IsNull().Throw();
+
             this.usersSv = usersSv;
-            this.UserManager = userManager;
-            this.SignInManager = signInManager;
-        }
-
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            this.signInService = signInService;
+            this.userService = userService;
         }
 
         //
@@ -83,7 +64,7 @@ namespace TelerikMovies.Web.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await this.signInService.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -117,10 +98,10 @@ namespace TelerikMovies.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = new Users { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var result = await this.userService.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await this.signInService.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -159,16 +140,14 @@ namespace TelerikMovies.Web.Controllers
         {
             if (disposing)
             {
-                if (_userManager != null)
+                if (this.userService != null)
                 {
-                    _userManager.Dispose();
-                    _userManager = null;
+                    this.userService.Dispose();
                 }
 
-                if (_signInManager != null)
+                if (this.signInService != null)
                 {
-                    _signInManager.Dispose();
-                    _signInManager = null;
+                    this.signInService.Dispose();
                 }
             }
 

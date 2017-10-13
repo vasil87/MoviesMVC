@@ -6,11 +6,11 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using TelerikMovies.Web.Models;
 using TelerikMovies.Models;
 using TelerikMovies.Data;
+using TelerikMovies.Services.Contracts.Auth;
 
-namespace TelerikMovies.Web
+namespace TelerikMovies.Services
 {
     public class EmailService : IIdentityMessageService
     {
@@ -31,7 +31,7 @@ namespace TelerikMovies.Web
     }
 
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
-    public class ApplicationUserManager : UserManager<Users>
+    public class ApplicationUserManager : UserManager<Users>, IUserManagerService
     {
         public ApplicationUserManager(IUserStore<Users> store)
             : base(store)
@@ -84,10 +84,14 @@ namespace TelerikMovies.Web
             }
             return manager;
         }
+        public Users FindById(string userId)
+        {
+            return UserManagerExtensions.FindById(this, userId);
+        }
     }
 
     // Configure the application sign-in manager which is used in this application.
-    public class ApplicationSignInManager : SignInManager<Users, string>
+    public class ApplicationSignInManager : SignInManager<Users, string>, ISignInManagerService
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
