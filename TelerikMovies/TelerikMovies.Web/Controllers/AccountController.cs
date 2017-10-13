@@ -205,7 +205,7 @@ namespace TelerikMovies.Web.Controllers
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            if (this.Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
