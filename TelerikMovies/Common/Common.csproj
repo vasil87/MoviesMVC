@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ManageMessageId.cs" />
     <Compile Include="ServicesNames.cs" />
     <Compile Include="DataTableOrderer.cs" />
     <Compile Include="Constants.cs" />

@@ -24,12 +24,6 @@ namespace TelerikMovies.Web.Controllers
         private readonly IUserManagerService userService;
         private readonly IUsersService usersSv;
 
-        public AccountController(IUsersService usersSv)
-        {
-            Guard.WhenArgument(usersSv,ServicesNames.UserService.ToString()).IsNull().Throw();
-            this.usersSv = usersSv;
-        }
-
         public AccountController(IUsersService usersSv, ISignInManagerService signInService, IUserManagerService userService)
         {
             Guard.WhenArgument(usersSv, ServicesNames.UserService.ToString()).IsNull().Throw();

@@ -36,14 +36,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
       <Private>True</Private>
@@ -133,15 +146,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TelerikMovies.Web\AccountController\Edit.cs" />
-    <Compile Include="TelerikMovies.Web\AccountController\Register.cs" />
-    <Compile Include="TelerikMovies.Web\AccountController\Login.cs" />
-    <Compile Include="TelerikMovies.Web\AccountController\Constructor.cs" />
-    <Compile Include="TelerikMovies.Web\AccountController\LogOff.cs" />
-    <Compile Include="TelerikMovies.Web\HomeController\About.cs" />
-    <Compile Include="TelerikMovies.Web\HomeController\Constructor.cs" />
-    <Compile Include="TelerikMovies.Web\HomeController\Contacts.cs" />
-    <Compile Include="TelerikMovies.Web\HomeController\Index.cs" />
+    <Compile Include="TelerikMovies.Web\AccountControllerTests\Edit.cs" />
+    <Compile Include="TelerikMovies.Web\AccountControllerTests\Register.cs" />
+    <Compile Include="TelerikMovies.Web\AccountControllerTests\Login.cs" />
+    <Compile Include="TelerikMovies.Web\AccountControllerTests\Constructor.cs" />
+    <Compile Include="TelerikMovies.Web\AccountControllerTests\LogOff.cs" />
+    <Compile Include="TelerikMovies.Web\HomeControllerTests\About.cs" />
+    <Compile Include="TelerikMovies.Web\HomeControllerTests\Constructor.cs" />
+    <Compile Include="TelerikMovies.Web\HomeControllerTests\Contacts.cs" />
+    <Compile Include="TelerikMovies.Web\HomeControllerTests\Index.cs" />
+    <Compile Include="TelerikMovies.Web\ManageControllerTests\Constructor.cs" />
+    <Compile Include="TelerikMovies.Web\ManageControllerTests\ChangePassword.cs" />
+    <Compile Include="TelerikMovies.Web\ManageControllerTests\Index.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

@@ -7,6 +7,7 @@ using Microsoft.Owin.Security;
 using TelerikMovies.Web.Models;
 using TelerikMovies.Services.Contracts.Auth;
 using Bytes2you.Validation;
+using Common;
 
 namespace TelerikMovies.Web.Controllers
 {
@@ -15,9 +16,6 @@ namespace TelerikMovies.Web.Controllers
     {
         private readonly ISignInManagerService signInService;
         private readonly IUserManagerService userService;
-        public ManageController()
-        {
-        }
 
         public ManageController(IUserManagerService userManager, ISignInManagerService signInManager)
         {
@@ -41,7 +39,7 @@ namespace TelerikMovies.Web.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
-            var userId = User.Identity.GetUserId();
+            var userId = this.User.Identity.GetUserId();
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
@@ -70,7 +68,8 @@ namespace TelerikMovies.Web.Controllers
             {
                 return View(model);
             }
-            var result = await this.userService.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            var userName = User.Identity.GetUserId();
+            var result = await this.userService.ChangePasswordAsync(userName, model.OldPassword, model.NewPassword);
             if (result.Succeeded)
             {
                 var user = await this.userService.FindByIdAsync(User.Identity.GetUserId());
@@ -83,14 +82,6 @@ namespace TelerikMovies.Web.Controllers
             AddErrors(result);
             return View(model);
         }
-
-        //
-        // GET: /Manage/SetPassword
-        public ActionResult SetPassword()
-        {
-            return View();
-        }
-
 
         protected override void Dispose(bool disposing)
         {
@@ -138,17 +129,6 @@ namespace TelerikMovies.Web.Controllers
                 return user.PasswordHash != null;
             }
             return false;
-        }
-
-        public enum ManageMessageId
-        {
-            AddPhoneSuccess,
-            ChangePasswordSuccess,
-            SetTwoFactorSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
-            RemovePhoneSuccess,
-            Error
         }
 
 #endregion
