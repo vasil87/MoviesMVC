@@ -10,21 +10,21 @@ using TelerikMovies.Services.Contracts;
 
 namespace TelerikMovies.Services
 {
-    public class MoviesService :DataBaseService, IMoviesService
+    public class MoviesService : DataBaseService, IMoviesService
     {
         public MoviesService(IEfGenericRepository<Movies> movies, IEfGenericRepository<Genres> genresRepo,
             IEfGenericRepository<Comments> commentsRepo, IEfGenericRepository<Users> userRepo,
-            IEfGenericRepository<Likes> likesRepo, IEfGenericRepository<Dislikes> dislikesRepo, IUoW saver) 
-            :base( movies,genresRepo,commentsRepo,userRepo, likesRepo, dislikesRepo, saver)
+            IEfGenericRepository<Likes> likesRepo, IEfGenericRepository<Dislikes> dislikesRepo, IUoW saver)
+            : base(movies, genresRepo, commentsRepo, userRepo, likesRepo, dislikesRepo, saver)
         {
 
         }
 
         public IResult AddMovie(Movies movie)
         {
-            var result = new Result("Success", ResultType.Success);
+            IResult result = new Result("Success", ResultType.Success);
 
-            var currentMovie = this.MoviesRepo.All().Where(x => x.Name.ToLower() == movie.Name.ToLower()).FirstOrDefault();
+            var currentMovie = this.GetMovie(movie.Id, ref result);
 
             if (currentMovie == null)
             {
@@ -44,18 +44,11 @@ namespace TelerikMovies.Services
                     }
                 }
 
-                try
+                this.SaveChange(() =>
                 {
-
                     movie.Genres = existingGenres;
                     this.MoviesRepo.Add(movie);
-                    this.Saver.Save();
-                }
-                catch (Exception ex)
-                {
-                    result.ErrorMsg = ex.Message;
-                    result.ResulType = ResultType.Error;
-                }
+                }, ref result);
 
             }
             else
@@ -94,7 +87,7 @@ namespace TelerikMovies.Services
 
         public IResult DeleteByid(Guid id)
         {
-            var result = new Result(ResultType.Success);
+            IResult result = new Result(ResultType.Success);
 
             var curentMovie = this.MoviesRepo.GetById(id);
             var isDeleted = curentMovie.IsDeleted;
@@ -108,16 +101,10 @@ namespace TelerikMovies.Services
             if (curentMovie != null)
             {
 
-                try
+                this.SaveChange(() =>
                 {
                     this.MoviesRepo.Delete(curentMovie);
-                    this.Saver.Save();
-                }
-                catch (Exception ex)
-                {
-                    result.ResulType = ResultType.Error;
-                    result.ErrorMsg = ex.Message;
-                }
+                }, ref result);
             }
             else
             {
@@ -129,7 +116,7 @@ namespace TelerikMovies.Services
 
         public IResult UndoDeleteById(Guid id)
         {
-            var result = new Result(ResultType.Success);
+            IResult result = new Result(ResultType.Success);
 
             var curentMovie = this.MoviesRepo.GetById(id);
             var isDeleted = curentMovie.IsDeleted;
@@ -143,17 +130,11 @@ namespace TelerikMovies.Services
             if (curentMovie != null)
             {
 
-                try
+                this.SaveChange(() =>
                 {
                     curentMovie.IsDeleted = false;
                     this.MoviesRepo.Update(curentMovie);
-                    this.Saver.Save();
-                }
-                catch (Exception ex)
-                {
-                    result.ResulType = ResultType.Error;
-                    result.ErrorMsg = ex.Message;
-                }
+                }, ref result);
             }
             else
             {
@@ -161,14 +142,13 @@ namespace TelerikMovies.Services
             }
 
             return result;
-        }   
+        }
 
         public IResult UpdateMovie(Movies movie)
         {
-            var result = new Result("Success", ResultType.Success);
+            IResult result = new Result("Success", ResultType.Success);
 
-            var currentMovie = this.MoviesRepo.GetById(movie.Id);
-
+            var currentMovie = this.GetMovie(movie.Id, ref result);
 
             if (currentMovie != null)
             {
@@ -183,16 +163,10 @@ namespace TelerikMovies.Services
                     currentMovie.ImgUrl = movie.ImgUrl;
                     currentMovie.TrailerUrl = movie.TrailerUrl;
 
-                    try
+                    this.SaveChange(() =>
                     {
                         this.MoviesRepo.Update(currentMovie);
-                        this.Saver.Save();
-                    }
-                    catch (Exception ex)
-                    {
-                        result.ErrorMsg = ex.Message;
-                        result.ResulType = ResultType.Error;
-                    }
+                    }, ref result);
                 }
                 else
                 {

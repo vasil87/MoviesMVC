@@ -28,10 +28,9 @@ namespace TelerikMovies.Services
 
         public IResult UpdateUser(Users user)
         {
-            var result = new Result("Success", ResultType.Success);
+            IResult result = new Result("Success", ResultType.Success);
 
-            var currentUser = this.GetByUserName(user.UserName);
-
+            var currentUser = this.UserRepo.All().Where(x => x.UserName.ToLower() == user.UserName.ToLower()).FirstOrDefault();
 
             if (currentUser != null)
             {
@@ -45,16 +44,7 @@ namespace TelerikMovies.Services
                     currentUser.isMale = user.isMale;
                     currentUser.City = user.City;
 
-                    try
-                    {
-                        this.UserRepo.Update(currentUser);
-                        this.Saver.Save();
-                    }
-                    catch (Exception ex)
-                    {
-                        result.ErrorMsg = ex.Message;
-                        result.ResulType = ResultType.Error;
-                    }
+                    this.SaveChange(() => { this.UserRepo.Update(currentUser); }, ref result);
                 }
                 else
                 {

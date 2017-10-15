@@ -24,7 +24,7 @@ namespace TelerikMovies.Services
 
         public IResult DeleteComment(Guid commentId, string userName)
         {
-            var result = new Result();
+            IResult result = new Result();
 
             var currentComent = this.CommentsRepo.GetById(commentId);
 
@@ -36,13 +36,11 @@ namespace TelerikMovies.Services
                 return result;
             }
 
-            var user = this.UserRepo.All().Where(x => x.UserName.ToLower() == userName.ToLower()).FirstOrDefault();
+            var user = this.GetCurrentUser(userName,ref result);
 
 
             if (user == null)
-            {
-                result.ResulType = ResultType.DoesntExists;
-                result.ErrorMsg = Constants.ErorsDict[ResultType.DoesntExists];
+            {        
                 return result;
             }
 
@@ -53,16 +51,7 @@ namespace TelerikMovies.Services
                 return result;
             }
 
-            try
-            {
-                this.CommentsRepo.Delete(currentComent);
-                this.Saver.Save();
-            }
-            catch (Exception ex)
-            {
-                result.ResulType = ResultType.Error;
-                result.ErrorMsg = ex.Message;
-            }
+            this.SaveChange(() => { this.CommentsRepo.Delete(currentComent); }, ref result);
 
             return result;
         }
@@ -86,25 +75,19 @@ namespace TelerikMovies.Services
 
         public IResult SaveComment(Guid movieId, string userName, string text)
         {
-            var result = new Result();
+            IResult result = new Result();
 
-            var currentUser = this.UserRepo.All().Where(x => x.UserName.ToLower() == userName.ToLower()).FirstOrDefault();
+            var currentUser = this.GetCurrentUser(userName, ref result);
 
             if (currentUser == null)
             {
-                result.ResulType = ResultType.Error;
-                result.ErrorMsg = Constants.UserNotExists;
-
                 return result;
             }
 
-            var currentMovie = this.MoviesRepo.GetById(movieId);
+            var currentMovie = this.GetMovie(movieId, ref result);
 
             if (currentMovie == null)
             {
-                result.ResulType = ResultType.Error;
-                result.ErrorMsg = Constants.MovieNotExists;
-
                 return result;
             }
 
@@ -115,16 +98,7 @@ namespace TelerikMovies.Services
                 Movie = currentMovie
             };
 
-            try
-            {
-                this.CommentsRepo.Add(comment);
-                this.Saver.Save();
-            }
-            catch(Exception ex)
-            {
-                result.ResulType = ResultType.Error;
-                result.ErrorMsg = ex.Message;
-            }
+            this.SaveChange(() => { this.CommentsRepo.Add(comment); }, ref result);
 
             return result;
         }

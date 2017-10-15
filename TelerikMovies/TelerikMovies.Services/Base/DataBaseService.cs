@@ -1,4 +1,7 @@
 ﻿
+using Common;
+using Common.Contracts;
+using Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +12,7 @@ using TelerikMovies.Models.Contracts;
 
 namespace TelerikMovies.Services
 {
-    public class DataBaseService
+    public abstract class DataBaseService
     {
         private readonly IEfGenericRepository<Movies> moviesRepo;
         private readonly IEfGenericRepository<Genres> genresRepo;
@@ -89,18 +92,18 @@ namespace TelerikMovies.Services
             }
         }
 
-        protected void UpdateGenresCollection(ICollection<Genres> initial, ICollection<Genres> newCollection)
+        public virtual void UpdateGenresCollection(ICollection<Genres> initial, ICollection<Genres> newCollection)
         {
             var existingElements = new HashSet<Genres>();
 
             foreach (var element in newCollection)
             {
 
-                var newElementToAdd = this.GenresRepo.AllNotDeleted().Where(x => x.Name == element.Name).FirstOrDefault();
+                var existingElement = this.GenresRepo.AllNotDeleted().Where(x => x.Name == element.Name).FirstOrDefault();
 
-                if (newElementToAdd != null)
+                if (existingElement != null)
                 {
-                    existingElements.Add(newElementToAdd);
+                    existingElements.Add(existingElement);
 
                 }
                 else
@@ -141,89 +144,49 @@ namespace TelerikMovies.Services
                 }
             }
         }
-        protected void UpdateCollection <T> (ICollection<T> initial , ICollection<T> newCollection ) where T:class,IDeletable,IAuditable,ITraceable
+     
+        public virtual Users GetCurrentUser(string userName,ref IResult result)
         {
-            var existingElements = new HashSet<T>();
 
-            foreach (var element in newCollection)
+            var currentUser = this.UserRepo.All().Where(x => x.UserName.ToLower() == userName.ToLower()).FirstOrDefault();
+
+
+            if (currentUser == null)
             {
-                var type = typeof(T);
-
-                var newElementToAdd = this.getRepo<T>().AllNotDeleted().Where(x => x.Id == element.Id).FirstOrDefault();
-
-                if (newElementToAdd != null)
-                {
-                    existingElements.Add(newElementToAdd);
-
-                }
-                else
-                {
-                    existingElements.Add(element);
-                }
+                result.ResulType = ResultType.DoesntExists;
+                result.ErrorMsg = Constants.UserNotExists;
             }
 
-            var elementsToRemove = new HashSet<T>();
-
-            foreach (var element in initial)
-            {
-                if (existingElements.Contains(element))
-                {
-                    continue;
-                }
-                else
-                {
-                    elementsToRemove.Add(element);
-                }
-            }
-
-            foreach (var element in elementsToRemove)
-            {
-                initial.Remove(element);
-            }
-
-
-            foreach (var element in existingElements)
-            {
-                if (initial.Contains(element))
-                {
-                    continue;
-                }
-                else
-                {
-                    initial.Add(element);
-                }
-            }
+            return currentUser;
         }
 
-        private IEfGenericRepository<G> getRepo<G>() where G : class, IDeletable, IAuditable,ITraceable
+        public virtual Movies GetMovie(Guid movieId, ref IResult result)
         {
-            if (typeof(G) == typeof(Movies))
-            {
-                return this.MoviesRepo as IEfGenericRepository<G>;
-            }
-            else if (typeof(G) == typeof(Genres))
-            {
-                return this.GenresRepo as IEfGenericRepository<G>;
-            }
-            else if(typeof(G) == typeof(Users))
-            {
-                return this.UserRepo as IEfGenericRepository<G>;
-            }
-            else if(typeof(G) == typeof(Likes))
-            {
-                return this.LikesRepo as IEfGenericRepository<G>;
-            }
-            else if (typeof(G) == typeof(Dislikes))
-            {
-                return this.DislikesRepo as IEfGenericRepository<G>;
-            }
-            else if (typeof(G) == typeof(Comments))
-            {
-                return this.CommentsRepo as IEfGenericRepository<G>;
-            }
-            return null;
 
+            var currentMovie = this.MoviesRepo.GetById(movieId);
+
+            if (currentMovie == null)
+            {
+                result.ResulType = ResultType.Error;
+                result.ErrorMsg = Constants.MovieNotExists;
+            }
+
+            return currentMovie;
         }
 
+        public virtual void SaveChange(Action action,ref IResult result)
+        {
+            try
+            {
+                action();
+                this.Saver.Save();
+
+            }
+            catch (Exception ex)
+            {
+                result.ResulType = ResultType.Error;
+                result.ErrorMsg = Constants.ErorsDict[ResultType.Error];
+            }
+        }
     }
 }

@@ -11,21 +11,19 @@ using TelerikMovies.Services.Contracts;
 namespace TelerikMovies.Services
 
 {
-    public class GenreService : IGenreService
+    public class GenreService :DataBaseService, IGenreService
     {
-        private readonly IEfGenericRepository<Genres> genresRepo;
-        private readonly IUoW saver;
-
-        public GenreService(IEfGenericRepository<Genres> genres, IUoW saver)
+        public GenreService(IEfGenericRepository<Movies> movies, IEfGenericRepository<Genres> genresRepo,
+            IEfGenericRepository<Comments> commentsRepo, IEfGenericRepository<Users> userRepo,
+            IEfGenericRepository<Likes> likesRepo, IEfGenericRepository<Dislikes> dislikesRepo, IUoW saver) 
+            :base( movies,genresRepo,commentsRepo,userRepo, likesRepo, dislikesRepo, saver)
         {
-            this.genresRepo = genres;
-            this.saver = saver;
-        }
 
+        }
         public Genres GetGenreByName(string name)
         {
 
-            var result = this.genresRepo.All().Where(x => x.Name.ToLower() == name.ToLower()).FirstOrDefault();
+            var result = this.GenresRepo.All().Where(x => x.Name.ToLower() == name.ToLower()).FirstOrDefault();
 
             return result;
         }
@@ -33,30 +31,20 @@ namespace TelerikMovies.Services
         public ICollection<Genres> GetAllNotExpired()
         {
 
-            var result = this.genresRepo.AllNotDeleted().ToList();
+            var result = this.GenresRepo.AllNotDeleted().ToList();
 
             return result;
         }
 
         public IResult AddGenre(Genres genre)
         {
-            var result = new Result("Success", ResultType.Success);
+            IResult result = new Result("Success", ResultType.Success);
 
-            var existingGenre = this.genresRepo.All().Where(x => x.Name.ToLower() == genre.Name.ToLower()).FirstOrDefault();
+            var existingGenre = this.GenresRepo.All().Where(x => x.Name.ToLower() == genre.Name.ToLower()).FirstOrDefault();
 
             if (existingGenre == null)
             {
-                try
-                {
-                    this.genresRepo.Add(genre);
-                    this.saver.Save();
-                }
-                catch (Exception ex)
-                {
-                    result.ErrorMsg = ex.Message;
-                    result.ResulType = ResultType.Error;
-                }
-
+                this.SaveChange(() => { this.GenresRepo.Add(genre); }, ref result);
             }
             else
             {

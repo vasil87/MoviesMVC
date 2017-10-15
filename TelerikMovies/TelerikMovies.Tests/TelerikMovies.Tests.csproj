@@ -146,6 +146,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TelerikMoviesServices\CommentsServiceTests\DeleteComment.cs" />
+    <Compile Include="TelerikMoviesServices\CommentsServiceTests\GetCommentsForAMovie.cs" />
+    <Compile Include="TelerikMoviesServices\CommentsServiceTests\SaveComment.cs" />
+    <Compile Include="TelerikMoviesServices\DataBaseServiceTests\SaveChanges.cs" />
+    <Compile Include="TelerikMoviesServices\DataBaseServiceTests\GetMovie.cs" />
+    <Compile Include="TelerikMoviesServices\DataBaseServiceTests\TestClass\StubClass.cs" />
+    <Compile Include="TelerikMoviesServices\DataBaseServiceTests\UpdateGenresCollection.cs" />
+    <Compile Include="TelerikMoviesServices\DataBaseServiceTests\GetCurrentUser.cs" />
+    <Compile Include="TelerikMoviesServices\GenreServiceTests\GetAllNotExpired.cs" />
+    <Compile Include="TelerikMoviesServices\GenreServiceTests\GetGenreByName.cs" />
+    <Compile Include="TelerikMoviesServices\GenreServiceTests\AddGenre.cs" />
+    <Compile Include="TelerikMoviesServices\UserServiceTests\UpdateUser.cs" />
+    <Compile Include="TelerikMoviesServices\UserServiceTests\GetByUserName.cs" />
     <Compile Include="TelerikMoviesWeb\AdminArea\GenresControllerTests\Constructor.cs" />
     <Compile Include="TelerikMoviesWeb\AdminArea\GenresControllerTests\GetAllNamesNotExpired.cs" />
     <Compile Include="TelerikMoviesWeb\AdminArea\GenresControllerTests\Create.cs" />
@@ -213,7 +226,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="TelerikMoviesServices\" />
+    <Folder Include="TelerikMoviesServices\VoteServiceTests\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

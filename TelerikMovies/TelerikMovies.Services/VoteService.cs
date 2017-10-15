@@ -23,26 +23,21 @@ namespace TelerikMovies.Services
 
         public IResult LikeOrDislikeAMovie(string userName, Guid movieId, bool isLike)
         {
-            var result = new Result();
+            IResult result = new Result();
             if (!isAlreadyLikedOrDislikedAMovie(userName, movieId))
             {
 
-                var currentUser = this.UserRepo.All().Where(x => x.UserName.ToLower() == userName.ToLower()).FirstOrDefault();
+                var currentUser = this.GetCurrentUser(userName, ref result);
 
                 if (currentUser == null)
                 {
-                    result.ResulType = ResultType.DoesntExists;
-                    result.ErrorMsg = Constants.ErorsDict[ResultType.DoesntExists];
                     return result;
                 }
 
-                var currentMovie = this.MoviesRepo.GetById(movieId);
+                var currentMovie = this.GetMovie(movieId, ref result);
 
                 if (currentMovie == null)
                 {
-                    result.ResulType = ResultType.Error;
-                    result.ErrorMsg = Constants.MovieNotExists;
-
                     return result;
                 }
 
@@ -55,16 +50,7 @@ namespace TelerikMovies.Services
                     this.DislikesRepo.Add(new Dislikes { User = currentUser, Movie = currentMovie });
                 }
 
-                try
-                {
-                    this.Saver.Save();
-
-                }
-                catch (Exception ex)
-                {
-                    result.ResulType = ResultType.Error;
-                    result.ErrorMsg = Constants.ErorsDict[ResultType.Error];
-                }
+                this.SaveChange(() => { }, ref result);
             }
             else
             {

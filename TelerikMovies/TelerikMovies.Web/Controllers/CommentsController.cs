@@ -25,7 +25,6 @@ namespace TelerikMovies.Web.Controllers
         }
 
         [HttpGet]
-        [AjaxOnlyAttribute]
         public ActionResult GetAllNotDeletedCommentsForAMovie(string id)
         {
             Guid Id;
