@@ -224,7 +224,6 @@
     <Compile Include="Models\Account\LoginViewModel.cs" />
     <Compile Include="Models\Comment\CommentForMoviesViewModel.cs" />
     <Compile Include="Models\Comment\CreateCommentViewModel.cs" />
-    <Compile Include="Models\Comment\DeleteCommentViewModel.cs" />
     <Compile Include="Models\Manage\IndexViewModel.cs" />
     <Compile Include="Models\Account\RegisterViewModel.cs" />
     <Compile Include="Areas\Admin\Models\GenreCreateViewModel.cs" />

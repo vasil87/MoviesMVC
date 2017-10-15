@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Bytes2you.Validation;
 using Common;
 using Common.Enums;
 using Newtonsoft.Json;
@@ -18,12 +19,11 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
     public class GenresController : Controller
     {
         private IGenreService genresSV;
-        private IUoW save;
 
-        public GenresController(IGenreService genres, IUoW save)
+        public GenresController(IGenreService genres)
         {
+            Guard.WhenArgument(genres, ServicesNames.GenresService.ToString()).IsNull().Throw();
             this.genresSV = genres;
-            this.save = save;
         }
         public ActionResult Index()
         {

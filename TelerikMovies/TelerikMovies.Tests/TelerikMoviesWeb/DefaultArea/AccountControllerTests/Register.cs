@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using TelerikMovies.Models;
 using Microsoft.AspNet.Identity;
 
-namespace TelerikMovies.Tests.TelerikMovieWeb.AccountControllerTests
+namespace TelerikMovies.Tests.TelerikMoviesWeb.AccountControllerTests
 {
 
     [TestClass]

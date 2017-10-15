@@ -1,6 +1,7 @@
 ﻿using Bytes2you.Validation;
 using Common;
 using Common.Enums;
+using System;
 using System.Net;
 using System.Web.Mvc;
 using TelerikMovies.Services.Contracts;
@@ -35,12 +36,12 @@ namespace TelerikMovies.Web.Controllers
         
         private ActionResult LikeOrDIslikeMovie(VoteViewModel vote,bool isItLike)
         {
-            if (vote.MovieId == null )
+            if (vote == null || vote.MovieId == default(Guid) )
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, Constants.MovieNotExists);
             }
 
-            if (vote.UserName == null || string.IsNullOrWhiteSpace(vote.UserName))
+            if (string.IsNullOrWhiteSpace(vote.UserName))
             { 
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, Constants.UserNotExists);
             }

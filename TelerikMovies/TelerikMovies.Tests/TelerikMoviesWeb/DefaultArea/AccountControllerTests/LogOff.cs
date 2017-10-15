@@ -9,7 +9,7 @@ using TelerikMovies.Services.Contracts;
 using TelerikMovies.Services.Contracts.Auth;
 using TestStack.FluentMVCTesting;
 
-namespace TelerikMovies.Tests.TelerikMovieWeb.AccountControllerTests
+namespace TelerikMovies.Tests.TelerikMoviesWeb.AccountControllerTests
 {
     [TestClass]
     public class LogOff

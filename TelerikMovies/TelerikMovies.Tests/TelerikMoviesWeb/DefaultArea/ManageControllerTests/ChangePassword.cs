@@ -15,7 +15,7 @@ using TelerikMovies.Web.Controllers;
 using TelerikMovies.Web.Models;
 using TestStack.FluentMVCTesting;
 
-namespace Movies.Tests.TelerikMovies.Web.ManageControllerTests
+namespace TelerikMovies.Tests.TelerikMoviesWeb.ManageControllerTests
 {
 
     [TestClass]

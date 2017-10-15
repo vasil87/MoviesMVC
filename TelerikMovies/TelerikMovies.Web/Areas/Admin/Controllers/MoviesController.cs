@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Bytes2you.Validation;
 using Common;
 using Common.Enums;
 using System;
@@ -20,12 +21,11 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
     public class MoviesController : DataTableController
     {
         private IMoviesService moviesSV;
-        private IUoW save;
 
-        public MoviesController(IMoviesService movies, IUoW save)
+        public MoviesController(IMoviesService movies)
         {
+            Guard.WhenArgument(movies, ServicesNames.MoviesService.ToString()).IsNull().Throw();
             this.moviesSV = movies;
-            this.save = save;
         }
         public ActionResult Index()
         {
@@ -126,11 +126,16 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(Guid[] ids)
         {
-            if (ids != null)
+            if (ids != null && ids.Count() !=0)
             {
                 foreach (var id in ids)
                 {
-                   var result= this.moviesSV.DeleteByid(id);
+                    if (id == default(Guid))
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Id can`t be null");
+                    }
+
+                    var result= this.moviesSV.DeleteByid(id);
                     if (result.ResulType != ResultType.Success)
                     {
                           return new HttpStatusCodeResult(HttpStatusCode.BadRequest, result.ErrorMsg);
@@ -147,10 +152,14 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult UndoDelete(Guid[] ids)
         {
-            if (ids != null)
+            if (ids != null && ids.Count() != 0)
             {
                 foreach (var id in ids)
                 {
+                    if (id == default(Guid))
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Id can`t be null");
+                    }
                     var result = this.moviesSV.UndoDeleteById(id);
                     if (result.ResulType != ResultType.Success)
                     {

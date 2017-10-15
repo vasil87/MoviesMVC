@@ -146,18 +146,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TelerikMovies.Web\AccountControllerTests\Edit.cs" />
-    <Compile Include="TelerikMovies.Web\AccountControllerTests\Register.cs" />
-    <Compile Include="TelerikMovies.Web\AccountControllerTests\Login.cs" />
-    <Compile Include="TelerikMovies.Web\AccountControllerTests\Constructor.cs" />
-    <Compile Include="TelerikMovies.Web\AccountControllerTests\LogOff.cs" />
-    <Compile Include="TelerikMovies.Web\HomeControllerTests\About.cs" />
-    <Compile Include="TelerikMovies.Web\HomeControllerTests\Constructor.cs" />
-    <Compile Include="TelerikMovies.Web\HomeControllerTests\Contacts.cs" />
-    <Compile Include="TelerikMovies.Web\HomeControllerTests\Index.cs" />
-    <Compile Include="TelerikMovies.Web\ManageControllerTests\Constructor.cs" />
-    <Compile Include="TelerikMovies.Web\ManageControllerTests\ChangePassword.cs" />
-    <Compile Include="TelerikMovies.Web\ManageControllerTests\Index.cs" />
+    <Compile Include="TelerikMoviesWeb\AdminArea\GenresControllerTests\Constructor.cs" />
+    <Compile Include="TelerikMoviesWeb\AdminArea\GenresControllerTests\GetAllNamesNotExpired.cs" />
+    <Compile Include="TelerikMoviesWeb\AdminArea\GenresControllerTests\Create.cs" />
+    <Compile Include="TelerikMoviesWeb\AdminArea\GenresControllerTests\Index.cs" />
+    <Compile Include="TelerikMoviesWeb\AdminArea\MoviesControllerTests\Constructor.cs" />
+    <Compile Include="TelerikMoviesWeb\AdminArea\MoviesControllerTests\UndoDelete.cs" />
+    <Compile Include="TelerikMoviesWeb\AdminArea\MoviesControllerTests\Delete.cs" />
+    <Compile Include="TelerikMoviesWeb\AdminArea\MoviesControllerTests\Edit.cs" />
+    <Compile Include="TelerikMoviesWeb\AdminArea\MoviesControllerTests\Create.cs" />
+    <Compile Include="TelerikMoviesWeb\AdminArea\MoviesControllerTests\AllMoviesJson.cs" />
+    <Compile Include="TelerikMoviesWeb\AdminArea\MoviesControllerTests\Index.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\AccountControllerTests\Edit.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\AccountControllerTests\Register.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\AccountControllerTests\Login.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\AccountControllerTests\Constructor.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\AccountControllerTests\LogOff.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\CommentsControllerTests\Constructor.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\CommentsControllerTests\DeleteComment.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\CommentsControllerTests\SaveComment.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\CommentsControllerTests\GetAllNotDeletedCommentsForAMovie.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\ErrorControllerTests\NotFound.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\ErrorControllerTests\Index.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\HomeControllerTests\About.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\HomeControllerTests\Constructor.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\HomeControllerTests\Contacts.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\HomeControllerTests\Index.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\ManageControllerTests\Constructor.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\ManageControllerTests\ChangePassword.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\ManageControllerTests\Index.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\MoviesControllerTests\Constructor.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\MoviesControllerTests\Details.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\MoviesControllerTests\Index.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\MoviesControllerTests\Search.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\MoviesControllerTests\RenderTopMovies.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\MoviesControllerTests\RenderCarousel.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\VoteControllerTests\Constructor.cs" />
+    <Compile Include="TelerikMoviesWeb\DefaultArea\VoteControllerTests\LikeDislike.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -188,7 +213,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="TelerikMovies.Services\" />
+    <Folder Include="TelerikMoviesServices\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

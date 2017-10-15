@@ -5,7 +5,7 @@ using TelerikMovies.Services.Contracts;
 using TelerikMovies.Services.Contracts.Auth;
 using TelerikMovies.Web.Controllers;
 
-namespace TelerikMovies.Tests.TelerikMovieWeb.ManageControllerTests
+namespace TelerikMovies.Tests.TelerikMoviesWeb.ManageControllerTests
 {
     /// <summary>
     /// Summary description for UnitTest1

@@ -45,7 +45,7 @@ namespace TelerikMovies.Web.Controllers
         [AjaxOnlyAttribute]
         public ActionResult SaveComment(CreateCommentViewModel model)
         {
-            if (model.Comment == null || string.IsNullOrWhiteSpace(model.Comment))
+            if (model==null|| string.IsNullOrWhiteSpace(model.Comment))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, Constants.EmptyRequest);
             }
@@ -74,7 +74,7 @@ namespace TelerikMovies.Web.Controllers
             HttpStatusCode stCode = HttpStatusCode.OK;
             IResult result = new Result();
 
-            if (commentId == null || string.IsNullOrWhiteSpace(commentId) || userName == null || string.IsNullOrWhiteSpace(userName))
+            if (string.IsNullOrWhiteSpace(commentId)  || string.IsNullOrWhiteSpace(userName))
             {
                     stCode = HttpStatusCode.BadRequest;
                     result.ErrorMsg = Constants.UserNotExists + " or " + Constants.MovieNotExists;

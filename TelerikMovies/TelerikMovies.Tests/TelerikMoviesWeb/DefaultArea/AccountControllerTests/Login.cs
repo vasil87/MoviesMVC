@@ -7,7 +7,7 @@ using TelerikMovies.Web.Models;
 using Microsoft.AspNet.Identity.Owin;
 using System.Web.Mvc;
 
-namespace TelerikMovies.Tests.TelerikMovieWeb.AccountControllerTests
+namespace TelerikMovies.Tests.TelerikMoviesWeb.AccountControllerTests
 {
 
     [TestClass]

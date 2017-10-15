@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 
-namespace TelerikMovies.Tests.TelerikMovieWeb.HomeControllerTests
+namespace TelerikMovies.Tests.TelerikMoviesWeb.HomeControllerTests
 {
 
     [TestClass]

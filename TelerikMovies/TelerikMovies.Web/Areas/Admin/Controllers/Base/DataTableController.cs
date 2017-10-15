@@ -7,7 +7,7 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
 { 
     public abstract class DataTableController:Controller
     {
-        protected void FillDataTable<T>(IDataTableViewModel<T> dataTableData,List<T> allData, int draw, int totalCount, int start = 0, int length = 10 )
+        protected virtual void FillDataTable<T>(IDataTableViewModel<T> dataTableData,List<T> allData, int draw, int totalCount, int start = 0, int length = 10 )
         {
             string search = Request.Params["search[value]"];
             int sortColumn = -1;

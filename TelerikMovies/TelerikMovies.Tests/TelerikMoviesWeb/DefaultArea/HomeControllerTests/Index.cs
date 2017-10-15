@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Mvc;
 
-namespace TelerikMovies.Tests.TelerikMovieWeb.HomeControllerTests
+namespace TelerikMovies.Tests.TelerikMoviesWeb.HomeControllerTests
 {
 
     [TestClass]

@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TelerikMovies.Tests.TelerikMovieWeb.HomeControllerTests
+namespace TelerikMovies.Tests.TelerikMoviesWeb.HomeControllerTests
 {
     /// <summary>
     /// Summary description for UnitTest1

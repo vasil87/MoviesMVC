@@ -16,7 +16,7 @@ using AutoMapper;
 using Common;
 using Common.Contracts;
 
-namespace TelerikMovies.Tests.TelerikMovieWeb.AccountController
+namespace TelerikMovies.Tests.TelerikMoviesWeb.AccountController
 {
 
     [TestClass]
