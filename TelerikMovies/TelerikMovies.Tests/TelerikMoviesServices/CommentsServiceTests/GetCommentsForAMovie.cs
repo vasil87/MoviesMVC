@@ -16,13 +16,24 @@ namespace TelerikMovies.Tests.TelerikMoviesServices.CommentsServiceTests
     [TestClass]
     public class GetCommentsForAMovie
     {
-        static Mock<IEfGenericRepository<Movies>> movies = new Mock<IEfGenericRepository<Movies>>();
-        static Mock<IEfGenericRepository<Genres>> genresRepo = new Mock<IEfGenericRepository<Genres>>();
-        static Mock<IEfGenericRepository<Comments>> commentsRepo = new Mock<IEfGenericRepository<Comments>>();
-        static Mock<IEfGenericRepository<Users>> userRepo = new Mock<IEfGenericRepository<Users>>();
-        static Mock<IEfGenericRepository<Likes>> likesRepo = new Mock<IEfGenericRepository<Likes>>();
-        static Mock<IEfGenericRepository<Dislikes>> dislikesRepo = new Mock<IEfGenericRepository<Dislikes>>();
-        static Mock<IUoW> saver = new Mock<IUoW>();
+        private Mock<IEfGenericRepository<Movies>> movies;
+        private Mock<IEfGenericRepository<Genres>> genresRepo;
+        private Mock<IEfGenericRepository<Comments>> commentsRepo;
+        private Mock<IEfGenericRepository<Users>> userRepo;
+        private Mock<IEfGenericRepository<Likes>> likesRepo;
+        private Mock<IEfGenericRepository<Dislikes>> dislikesRepo;
+        private Mock<IUoW> saver;
+        [TestInitialize]
+        public void Startup()
+        {
+            movies = new Mock<IEfGenericRepository<Movies>>();
+            genresRepo = new Mock<IEfGenericRepository<Genres>>();
+            commentsRepo = new Mock<IEfGenericRepository<Comments>>();
+            userRepo = new Mock<IEfGenericRepository<Users>>();
+            likesRepo = new Mock<IEfGenericRepository<Likes>>();
+            dislikesRepo = new Mock<IEfGenericRepository<Dislikes>>();
+            saver = new Mock<IUoW>();
+        }
 
         [TestMethod]
         public void CallsAllIfNotDeleteIsFalseAndReturnsOnlyMovieThatGotSameId()

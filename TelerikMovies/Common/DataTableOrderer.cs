@@ -45,7 +45,7 @@ namespace Common
             // simulate sort
             if (propertyType == typeof(String))
             {
-                list.Sort((x, y) => SortString((propertyToUse.GetValue(x) as string),(propertyToUse.GetValue(y) as string), sortDirection));
+                list.Sort((x, y) => SortString((propertyToUse.GetValue(x) as string), (propertyToUse.GetValue(y) as string), sortDirection));
             }
             else if (propertyType == typeof(Int32))
             {// sort Age

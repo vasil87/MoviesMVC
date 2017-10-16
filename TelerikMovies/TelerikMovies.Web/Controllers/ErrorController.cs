@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace CoBuilder.GoBim.Web.Controllers
+namespace TelerikMovies.Web.Controllers
 {
     public class ErrorController : Controller
     {

@@ -157,8 +157,18 @@
     <Compile Include="TelerikMoviesServices\GenreServiceTests\GetAllNotExpired.cs" />
     <Compile Include="TelerikMoviesServices\GenreServiceTests\GetGenreByName.cs" />
     <Compile Include="TelerikMoviesServices\GenreServiceTests\AddGenre.cs" />
+    <Compile Include="TelerikMoviesServices\MoviesServiceTests\SearchForMovies.cs" />
+    <Compile Include="TelerikMoviesServices\MoviesServiceTests\GetRandomMovies.cs" />
+    <Compile Include="TelerikMoviesServices\MoviesServiceTests\GetTopMovies.cs" />
+    <Compile Include="TelerikMoviesServices\MoviesServiceTests\GetAllAndDeleted.cs" />
+    <Compile Include="TelerikMoviesServices\MoviesServiceTests\GetMovieById.cs" />
+    <Compile Include="TelerikMoviesServices\MoviesServiceTests\UpdateMovie.cs" />
+    <Compile Include="TelerikMoviesServices\MoviesServiceTests\UndoDeleteById.cs" />
+    <Compile Include="TelerikMoviesServices\MoviesServiceTests\DeleteById.cs" />
+    <Compile Include="TelerikMoviesServices\MoviesServiceTests\AddMovie.cs" />
     <Compile Include="TelerikMoviesServices\UserServiceTests\UpdateUser.cs" />
     <Compile Include="TelerikMoviesServices\UserServiceTests\GetByUserName.cs" />
+    <Compile Include="TelerikMoviesServices\VoteServiceTests\LikeOrDislikeAMovie.cs" />
     <Compile Include="TelerikMoviesWeb\AdminArea\GenresControllerTests\Constructor.cs" />
     <Compile Include="TelerikMoviesWeb\AdminArea\GenresControllerTests\GetAllNamesNotExpired.cs" />
     <Compile Include="TelerikMoviesWeb\AdminArea\GenresControllerTests\Create.cs" />
@@ -225,9 +235,7 @@
       <Name>TelerikMovies.Web</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TelerikMoviesServices\VoteServiceTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -4,10 +4,10 @@ using System.Web.Mvc;
 using TelerikMovies.Web.Areas.Admin.Models.Contracts;
 
 namespace TelerikMovies.Web.Areas.Admin.Controllers
-{ 
-    public abstract class DataTableController:Controller
+{
+    public abstract class DataTableController : Controller
     {
-        protected virtual void FillDataTable<T>(IDataTableViewModel<T> dataTableData,List<T> allData, int draw, int totalCount, int start = 0, int length = 10 )
+        protected virtual void FillDataTable<T>(IDataTableViewModel<T> dataTableData, List<T> allData, int draw, int totalCount, int start = 0, int length = 10)
         {
             string search = Request.Params["search[value]"];
             int sortColumn = -1;
@@ -30,8 +30,8 @@ namespace TelerikMovies.Web.Areas.Admin.Controllers
             dataTableData.recordsFiltered = recordsFiltered;
         }
 
-       
 
-       
+
+
     }
 }

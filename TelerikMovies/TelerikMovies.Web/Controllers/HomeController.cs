@@ -9,7 +9,7 @@ namespace TelerikMovies.Web.Controllers
         }
         public ActionResult Index()
         {
-            return this.RedirectToActionPermanent("Index", "Movies",new {Area =""});
+            return this.RedirectToActionPermanent("Index", "Movies", new { Area = "" });
         }
 
         public ActionResult About()

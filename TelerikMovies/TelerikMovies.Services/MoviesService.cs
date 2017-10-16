@@ -60,54 +60,38 @@ namespace TelerikMovies.Services
             return result;
         }
 
-        public ICollection<Movies> GetAllAndDeleted()
-        {
-            return this.MoviesRepo.All().ToList();
-        }
-        public Movies GetMovieById(Guid id, bool getDeleted = false)
-        {
-            var curentMovie = this.MoviesRepo.GetById(id);
-
-            if (getDeleted)
-            {
-                return curentMovie;
-            }
-            else
-            {
-                if (curentMovie.IsDeleted == true)
-                {
-                    return null;
-                }
-                else
-                {
-                    return curentMovie;
-                }
-            }
-        }
-
         public IResult DeleteByid(Guid id)
         {
             IResult result = new Result(ResultType.Success);
 
-            var curentMovie = this.MoviesRepo.GetById(id);
-            var isDeleted = curentMovie.IsDeleted;
-
-            if (isDeleted)
-            {
-                result = new Result(ResultType.AlreadyDeleted);
-                return result;
-            }
+            var curentMovie = this.GetMovie(id, ref result);
 
             if (curentMovie != null)
             {
+                var isDeleted = curentMovie.IsDeleted;
 
-                this.SaveChange(() =>
+                if (isDeleted)
                 {
-                    this.MoviesRepo.Delete(curentMovie);
-                }, ref result);
+                    result = new Result(ResultType.AlreadyDeleted);
+                    return result;
+                }
+
+                if (curentMovie != null)
+                {
+
+                    this.SaveChange(() =>
+                    {
+                        this.MoviesRepo.Delete(curentMovie);
+                    }, ref result);
+                }
+                else
+                {
+                    result.ResulType = ResultType.DoesntExists;
+                }
             }
             else
             {
+                result.ErrorMsg = Constants.MovieNotExists;
                 result.ResulType = ResultType.DoesntExists;
             }
 
@@ -118,26 +102,35 @@ namespace TelerikMovies.Services
         {
             IResult result = new Result(ResultType.Success);
 
-            var curentMovie = this.MoviesRepo.GetById(id);
-            var isDeleted = curentMovie.IsDeleted;
-
-            if (!isDeleted)
-            {
-                result = new Result(ResultType.AlreadyExists);
-                return result;
-            }
+            var curentMovie = this.GetMovie(id, ref result);
 
             if (curentMovie != null)
             {
+                var isDeleted = curentMovie.IsDeleted;
 
-                this.SaveChange(() =>
+                if (!isDeleted)
                 {
-                    curentMovie.IsDeleted = false;
-                    this.MoviesRepo.Update(curentMovie);
-                }, ref result);
+                    result = new Result(ResultType.AlreadyExists);
+                    return result;
+                }
+
+                if (curentMovie != null)
+                {
+
+                    this.SaveChange(() =>
+                    {
+                        curentMovie.IsDeleted = false;
+                        this.MoviesRepo.Update(curentMovie);
+                    }, ref result);
+                }
+                else
+                {
+                    result.ResulType = ResultType.DoesntExists;
+                }
             }
             else
             {
+                result.ErrorMsg = Constants.MovieNotExists;
                 result.ResulType = ResultType.DoesntExists;
             }
 
@@ -182,6 +175,31 @@ namespace TelerikMovies.Services
 
             return result;
         }
+        public Movies GetMovieById(Guid id, bool getDeleted = false)
+        {
+            var curentMovie = this.MoviesRepo.GetById(id);
+
+            if (getDeleted)
+            {
+                return curentMovie;
+            }
+            else
+            {
+                if (curentMovie.IsDeleted == true)
+                {
+                    return null;
+                }
+                else
+                {
+                    return curentMovie;
+                }
+            }
+        }
+
+        public ICollection<Movies> GetAllAndDeleted()
+        {
+            return this.MoviesRepo.All().ToList();
+        }
 
         public ICollection<Movies> GetTopMovies()
         {
@@ -202,7 +220,7 @@ namespace TelerikMovies.Services
             }
             else
             {
-                for (int i = 0; i < moviesForCarouselCount; i++)
+                while (result.Count < moviesForCarouselCount)
                 {
                     int r = rnd.Next(movies.Count);
                     result.Add(movies[r]);

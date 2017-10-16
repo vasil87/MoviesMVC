@@ -1,8 +1,8 @@
-﻿using CoBuilder.GoBim.Web.Controllers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Web;
 using System.Web.Mvc;
+using TelerikMovies.Web.Controllers;
 using TestStack.FluentMVCTesting;
 
 namespace TelerikMovies.Tests.TelerikMoviesWeb.ErrorControllerTests
