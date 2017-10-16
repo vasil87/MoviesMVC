@@ -14,6 +14,7 @@
         {
 
         }
+        public IDbSet<Genres> Genres { get; set; }
         public IDbSet<Movies> Movies { get; set; }
         public IDbSet<Comments> Comments { get; set; }
         public IDbSet<Likes> Likes { get; set; }

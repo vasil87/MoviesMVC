@@ -17,5 +17,6 @@ C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Models\bin
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Models\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Models\bin\Debug\System.Net.Http.Formatting.xml
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Models\bin\Debug\System.Web.Http.xml
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Models\obj\Debug\TelerikMovies.Models.csprojResolveAssemblyReference.cache
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Models\obj\Debug\TelerikMovies.Models.dll
 C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\Data\MovieDb.Models\obj\Debug\TelerikMovies.Models.pdb

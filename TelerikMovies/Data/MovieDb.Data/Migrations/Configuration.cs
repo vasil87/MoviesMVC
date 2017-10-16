@@ -6,6 +6,7 @@
     using System;
     using System.Configuration;
     using System.Data.Entity.Migrations;
+    using System.Diagnostics;
     using System.Linq;
     public sealed class Configuration : DbMigrationsConfiguration<MoviesContext>
     {
@@ -19,6 +20,7 @@
         public Configuration()
             
         {
+            
             this.AutomaticMigrationsEnabled = false;
             this.AutomaticMigrationDataLossAllowed = false;
             administratorUserName= ConfigurationManager.AppSettings["AdministratorUserName"];

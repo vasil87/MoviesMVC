@@ -6,6 +6,7 @@ namespace TelerikMovies.Data.Contracts
 {
     public interface IMoviesContext
     {
+        IDbSet<Genres> Genres { get; set; }
         IDbSet<Comments> Comments { get; set; }
         IDbSet<Dislikes> Dislikes { get; set; }
         IDbSet<Likes> Likes { get; set; }

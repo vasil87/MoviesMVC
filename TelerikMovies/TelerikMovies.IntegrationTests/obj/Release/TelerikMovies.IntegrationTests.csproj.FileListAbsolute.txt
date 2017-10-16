@@ -1,0 +1,1 @@
+C:\Users\Vasil\Desktop\gitmovies\MoviesMVC\TelerikMovies\TelerikMovies.IntegrationTests\obj\Release\TelerikMovies.IntegrationTests.csprojResolveAssemblyReference.cache
