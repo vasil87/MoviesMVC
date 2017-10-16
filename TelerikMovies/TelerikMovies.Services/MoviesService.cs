@@ -23,8 +23,8 @@ namespace TelerikMovies.Services
         public IResult AddMovie(Movies movie)
         {
             IResult result = new Result("Success", ResultType.Success);
-
-            var currentMovie = this.GetMovie(movie.Id, ref result);
+            IResult movieGetResult= new Result("Success", ResultType.Success);
+            var currentMovie = this.GetMovie(movie.Id, ref movieGetResult);
 
             if (currentMovie == null)
             {
@@ -63,8 +63,8 @@ namespace TelerikMovies.Services
         public IResult DeleteByid(Guid id)
         {
             IResult result = new Result(ResultType.Success);
-
-            var curentMovie = this.GetMovie(id, ref result);
+            IResult movieGetResult = new Result("Success", ResultType.Success);
+            var curentMovie = this.GetMovie(id, ref movieGetResult);
 
             if (curentMovie != null)
             {
@@ -101,8 +101,8 @@ namespace TelerikMovies.Services
         public IResult UndoDeleteById(Guid id)
         {
             IResult result = new Result(ResultType.Success);
-
-            var curentMovie = this.GetMovie(id, ref result);
+            IResult movieGetResult= new Result(ResultType.Success);
+            var curentMovie = this.GetMovie(id, ref movieGetResult);
 
             if (curentMovie != null)
             {
@@ -140,8 +140,9 @@ namespace TelerikMovies.Services
         public IResult UpdateMovie(Movies movie)
         {
             IResult result = new Result("Success", ResultType.Success);
+            IResult movieGetResult = new Result(ResultType.Success);
 
-            var currentMovie = this.GetMovie(movie.Id, ref result);
+            var currentMovie = this.GetMovie(movie.Id, ref movieGetResult);
 
             if (currentMovie != null)
             {
