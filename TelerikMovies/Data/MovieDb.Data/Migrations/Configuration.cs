@@ -19,8 +19,7 @@
 
         public Configuration()
             
-        {
-            
+        {      
             this.AutomaticMigrationsEnabled = false;
             this.AutomaticMigrationDataLossAllowed = false;
             administratorUserName= ConfigurationManager.AppSettings["AdministratorUserName"];

@@ -44,7 +44,10 @@ namespace TelerikMovies.Services
 
             if (existingGenre == null)
             {
-                this.SaveChange(() => { this.GenresRepo.Add(genre); }, ref result);
+                this.SaveChange(() =>
+                {
+                    this.GenresRepo.Add(genre);
+                }, ref result);
             }
             else
             {

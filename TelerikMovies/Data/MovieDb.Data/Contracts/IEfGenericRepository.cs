@@ -16,6 +16,5 @@
         void Delete(T entity);
 
         void Delete(object id);
-
     }
 }
