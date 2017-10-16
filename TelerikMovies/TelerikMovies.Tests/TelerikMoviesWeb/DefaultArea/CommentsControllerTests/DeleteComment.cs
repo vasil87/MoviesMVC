@@ -17,15 +17,15 @@ namespace TelerikMovies.Tests.TelerikMoviesWeb.CommentsControllerTests
     {
 
         [TestMethod]
-        [DataRow(null,null)]
-        [DataRow("123", null)]
-        public void ShouldReturnBadRequestIfNullParam(string commentId, string userName)
+        public void ShouldReturnBadRequestIfNullParam()
         {
+            string commentId = null;
+            string userName = null;
             var moqUserService = new Mock<ICommentsService>();
             var sut = new CommentsController(moqUserService.Object);
 
             sut
-              .WithCallTo(c => c.DeleteComment(commentId,userName))
+              .WithCallTo(c => c.DeleteComment(commentId, userName))
             .ShouldGiveHttpStatus(HttpStatusCode.BadRequest);
         }
 
@@ -43,15 +43,15 @@ namespace TelerikMovies.Tests.TelerikMoviesWeb.CommentsControllerTests
         [TestMethod]
         public void ShouldReturnInternalServerErrorIfValidModelButErrorOnSave()
         {
-           
+
             //Arrange
             var userName = "vasil";
             var commentId = new Guid();
             var errorResult = new Result(ResultType.Error);
             var moqUserService = new Mock<ICommentsService>();
-            moqUserService.Setup(x => x.DeleteComment(commentId,userName)).Returns(errorResult);
+            moqUserService.Setup(x => x.DeleteComment(commentId, userName)).Returns(errorResult);
             var sut = new CommentsController(moqUserService.Object);
-           
+
 
             //Act & Assert
             sut

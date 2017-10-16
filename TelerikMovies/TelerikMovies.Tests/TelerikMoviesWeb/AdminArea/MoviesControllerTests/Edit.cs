@@ -5,6 +5,7 @@ using Common.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Principal;
 using System.Web;
@@ -23,17 +24,22 @@ namespace TelerikMovies.Tests.TelerikMoviesWeb.AdminArea.MoviesControllerTests
     public class Edit
     {
         [TestMethod]
-        [DataRow(null)]
-        [DataRow("")]
-        [DataRow("asdf")]
-        public void ShouldReturn404ViewIfInvalidId(string id)
+        public void ShouldReturn404ViewIfInvalidId()
         {
-            var moqMoviesService = new Mock<IMoviesService>();
-            var sut = new MoviesController(moqMoviesService.Object);
+            var rows = new List<string>();
+            rows.Add(null);
+            rows.Add(string.Empty);
+            rows.Add("asdf");
+            foreach (var id in rows)
+            {
+                var moqMoviesService = new Mock<IMoviesService>();
+                var sut = new MoviesController(moqMoviesService.Object);
 
-            sut
-              .WithCallTo(c => c.Edit(id))
-              .ShouldRenderView("404");
+                sut
+                  .WithCallTo(c => c.Edit(id))
+                  .ShouldRenderView("404");
+            }
+           
         }
         [TestMethod]
         public void ShouldReturnViewWithRightModel()

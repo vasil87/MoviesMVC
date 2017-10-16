@@ -17,17 +17,21 @@ namespace TelerikMovies.Tests.TelerikMoviesWeb.CommentsControllerTests
     public class GetAllNotDeletedCommentsForAMovie
     {
         [TestMethod]
-        [DataRow(null)]
-        [DataRow("")]
-        [DataRow("asdf")]
-        public void ShouldReturn404ViewIfInvalidId(string id)
+        public void ShouldReturn404ViewIfInvalidId()
         {
-            var moqUserService = new Mock<ICommentsService>();
-            var sut = new CommentsController(moqUserService.Object);
+            var ids = new List<string>();
+            ids.Add(null);
+            ids.Add(string.Empty);
+            ids.Add("asdf");
+            foreach (var id in ids)
+            {
+                var moqUserService = new Mock<ICommentsService>();
+                var sut = new CommentsController(moqUserService.Object);
 
-            sut
-              .WithCallTo(c => c.GetAllNotDeletedCommentsForAMovie(id))
-              .ShouldRenderView("404");
+                sut
+                  .WithCallTo(c => c.GetAllNotDeletedCommentsForAMovie(id))
+                  .ShouldRenderView("404");
+            }
         }
         [TestMethod]
         public void ShouldReturnPartialViewWithRightModel()

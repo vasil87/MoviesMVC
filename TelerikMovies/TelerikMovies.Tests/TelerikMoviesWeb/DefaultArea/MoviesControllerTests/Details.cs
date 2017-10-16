@@ -18,17 +18,22 @@ namespace TelerikMovies.Tests.TelerikMoviesWeb.CommentsControllerTests
     public class Details
     {
         [TestMethod]
-        [DataRow(null)]
-        [DataRow("")]
-        [DataRow("asdf")]
-        public void ShouldReturn404ViewIfInvalidId(string id)
-        {
-            var moqMoviesService= new Mock<IMoviesService>();
-            var sut = new MoviesController(moqMoviesService.Object);
 
-            sut
-              .WithCallTo(c => c.Details(id))
-              .ShouldRenderView("404");
+        public void ShouldReturn404ViewIfInvalidId()
+        {
+            var rows = new List<string>();
+            rows.Add(null);
+            rows.Add(string.Empty);
+            rows.Add("asdf");
+            foreach (var id in rows)
+            {
+                var moqMoviesService = new Mock<IMoviesService>();
+                var sut = new MoviesController(moqMoviesService.Object);
+
+                sut
+                  .WithCallTo(c => c.Details(id))
+                  .ShouldRenderView("404");
+            }
         }
         [TestMethod]
         public void ShouldReturnViewWithRightModel()
